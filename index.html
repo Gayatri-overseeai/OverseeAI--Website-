@@ -3,1100 +3,43 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="OverseeAI — insurance product infrastructure for carriers.">
-  <title>OverseeAI — Insurance Product Infrastructure</title>
-  <style>
-    :root {
-      --navy: #081a2b;
-      --navy-2: #10283d;
-      --ink: #122231;
-      --text: #293845;
-      --muted: #60707c;
-      --paper: #f2efe8;
-      --paper-2: #faf9f6;
-      --white: #ffffff;
-      --line: #cfd4d6;
-      --line-dark: rgba(255,255,255,.22);
-      --blue: #547991;
-      --blue-pale: #dfe8ec;
-      --bronze: #9b7b48;
-      --max: 1280px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--paper-2);
-      color: var(--ink);
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-    a { color: inherit; text-decoration: none; }
-    h1, h2, h3, p { margin: 0; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-
-    .wrap {
-      width: min(var(--max), calc(100% - 96px));
-      margin-inline: auto;
-    }
-
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: rgba(250,249,246,.96);
-      border-bottom: 1px solid #d8dcde;
-      backdrop-filter: blur(10px);
-    }
-    .header-inner {
-      min-height: 78px;
-      display: grid;
-      grid-template-columns: 240px 1fr auto;
-      align-items: center;
-      gap: 34px;
-    }
-    .brand {
-      font-size: 20px;
-      font-weight: 760;
-      letter-spacing: -.035em;
-    }
-    .brand span {
-      margin-left: 8px;
-      color: var(--bronze);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .16em;
-      vertical-align: top;
-    }
-    .nav {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      color: #3d4b55;
-      font-size: 13px;
-      font-weight: 560;
-    }
-    .nav a { padding-block: 29px; border-bottom: 1px solid transparent; }
-    .nav a:hover { border-bottom-color: var(--navy); }
-    .header-action {
-      min-height: 40px;
-      padding: 0 16px;
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid var(--navy);
-      font-size: 12px;
-      font-weight: 680;
-      letter-spacing: .02em;
-    }
-    .menu { display: none; }
-
-    .hero {
-      min-height: 760px;
-      padding: 84px 0 64px;
-      color: var(--white);
-      background: var(--navy);
-      border-bottom: 1px solid #24384a;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: linear-gradient(to bottom, transparent 0, rgba(0,0,0,.65) 42%, #000 100%);
-    }
-    .hero-inner { position: relative; z-index: 1; }
-    .kicker {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 46px;
-      color: #bfcbd2;
-      font-size: 11px;
-      font-weight: 680;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-    .kicker::before { content: ""; width: 36px; height: 1px; background: #a28657; }
-    h1 {
-      max-width: 1120px;
-      font-size: clamp(58px, 7.6vw, 112px);
-      line-height: .94;
-      letter-spacing: -.065em;
-      font-weight: 520;
-    }
-    .hero-lower {
-      margin-top: 70px;
-      padding-top: 28px;
-      border-top: 1px solid var(--line-dark);
-      display: grid;
-      grid-template-columns: 7fr 3fr 2fr;
-      gap: 42px;
-      align-items: start;
-    }
-    .hero-copy {
-      max-width: 740px;
-      color: #d6dee3;
-      font-size: 19px;
-      line-height: 1.62;
-    }
-    .hero-audience {
-      padding-left: 22px;
-      border-left: 1px solid var(--line-dark);
-    }
-    .hero-audience small,
-    .mini-label {
-      display: block;
-      margin-bottom: 10px;
-      color: #94a8b5;
-      font-size: 10px;
-      font-weight: 680;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-    .hero-audience p { color: #f1f4f5; font-size: 14px; line-height: 1.55; }
-    .hero-actions { display: grid; gap: 9px; }
-    .btn {
-      min-height: 46px;
-      padding: 0 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-between;
-      border: 1px solid rgba(255,255,255,.55);
-      color: white;
-      font-size: 12px;
-      font-weight: 680;
-      transition: background .18s ease, color .18s ease;
-    }
-    .btn::after { content: "↗"; font-size: 15px; font-weight: 400; }
-    .btn:hover { background: white; color: var(--navy); }
-    .btn.primary { background: white; color: var(--navy); border-color: white; }
-    .btn.primary:hover { background: #e7ecef; }
-
-    section { border-bottom: 1px solid var(--line); }
-    .section { padding: 116px 0; }
-    .section-head {
-      display: grid;
-      grid-template-columns: 3fr 9fr;
-      gap: 50px;
-      margin-bottom: 68px;
-    }
-    .section-number {
-      color: var(--bronze);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-    }
-    h2 {
-      max-width: 920px;
-      font-size: clamp(42px, 5vw, 72px);
-      font-weight: 500;
-      line-height: 1.02;
-      letter-spacing: -.052em;
-    }
-    .section-intro {
-      max-width: 760px;
-      margin-top: 26px;
-      color: var(--text);
-      font-size: 18px;
-      line-height: 1.66;
-    }
-
-    .obligation-grid {
-      display: grid;
-      grid-template-columns: 4fr 8fr;
-      gap: 64px;
-      align-items: start;
-    }
-    .obligation-copy p {
-      margin-bottom: 22px;
-      color: var(--text);
-      font-size: 16px;
-      line-height: 1.72;
-    }
-    .obligation-copy p:last-child { margin-bottom: 0; }
-    .timeline {
-      border-top: 1px solid var(--ink);
-    }
-    .timeline-row {
-      min-height: 102px;
-      display: grid;
-      grid-template-columns: 94px 1fr 1.4fr;
-      align-items: center;
-      border-bottom: 1px solid var(--line);
-    }
-    .timeline-index { color: var(--bronze); font-size: 12px; letter-spacing: .12em; }
-    .timeline-title { font-size: 20px; font-weight: 600; letter-spacing: -.025em; }
-    .timeline-text { color: var(--muted); font-size: 14px; line-height: 1.55; }
-
-    .dark-section {
-      background: var(--navy);
-      color: white;
-      border-bottom-color: #24384a;
-    }
-    .dark-section .section-number { color: #b99a65; }
-    .dark-section .section-intro { color: #c9d2d8; }
-
-    .estate-diagram {
-      position: relative;
-      padding: 42px 0 12px;
-      border-top: 1px solid var(--line-dark);
-      border-bottom: 1px solid var(--line-dark);
-    }
-    .estate-grid {
-      display: grid;
-      grid-template-columns: 2.2fr .7fr 2.5fr .7fr 4.1fr;
-      gap: 0;
-      align-items: stretch;
-    }
-    .diagram-col { padding: 0 22px; }
-    .diagram-col:first-child { padding-left: 0; }
-    .diagram-col:last-child { padding-right: 0; }
-    .diagram-label {
-      min-height: 36px;
-      margin-bottom: 20px;
-      color: #8fa3b1;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-    }
-    .source-list, .system-list { display: grid; gap: 8px; }
-    .source-item, .system-item, .translation-box {
-      min-height: 52px;
-      display: flex;
-      align-items: center;
-      padding: 0 15px;
-      border: 1px solid rgba(255,255,255,.23);
-      color: #edf2f4;
-      font-size: 13px;
-      line-height: 1.35;
-    }
-    .translation-box {
-      min-height: 292px;
-      align-items: flex-start;
-      padding: 21px;
-      background: rgba(255,255,255,.045);
-    }
-    .translation-box strong { display: block; margin-bottom: 18px; font-size: 18px; letter-spacing: -.025em; }
-    .translation-box ul { margin: 0; padding: 0; list-style: none; }
-    .translation-box li {
-      padding: 10px 0;
-      border-top: 1px solid rgba(255,255,255,.14);
-      color: #c4d0d6;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-    .arrow-col {
-      display: grid;
-      place-items: center;
-      color: #8297a5;
-      font-size: 26px;
-    }
-    .system-item { justify-content: space-between; }
-    .system-item span:last-child { color: #879ca9; font-size: 11px; }
-    .estate-note {
-      margin-top: 30px;
-      padding: 23px 0 9px;
-      display: grid;
-      grid-template-columns: 3fr 9fr;
-      border-top: 1px solid rgba(255,255,255,.14);
-      color: #c9d2d8;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .estate-note strong { color: #fff; font-size: 12px; letter-spacing: .09em; text-transform: uppercase; }
-
-    .twin {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-top: 1px solid var(--ink);
-    }
-    .twin-panel { padding: 45px 56px 48px 0; }
-    .twin-panel + .twin-panel { padding-left: 56px; padding-right: 0; border-left: 1px solid var(--line); }
-    .twin-panel .label {
-      margin-bottom: 32px;
-      color: var(--bronze);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-    .twin-panel h3 {
-      margin-bottom: 20px;
-      font-size: 30px;
-      line-height: 1.12;
-      letter-spacing: -.035em;
-      font-weight: 560;
-    }
-    .twin-panel p { color: var(--text); font-size: 16px; line-height: 1.7; }
-    .twin-list { margin-top: 30px; border-top: 1px solid var(--line); }
-    .twin-list div {
-      min-height: 56px;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid var(--line);
-      color: #34434e;
-      font-size: 14px;
-    }
-
-    .use-case-list { border-top: 1px solid var(--ink); }
-    .use-case {
-      display: grid;
-      grid-template-columns: 88px 3.5fr 6.5fr 28px;
-      gap: 24px;
-      align-items: center;
-      min-height: 112px;
-      border-bottom: 1px solid var(--line);
-      transition: background .18s ease;
-    }
-    .use-case:hover { background: #eeece6; }
-    .use-case-num { color: var(--bronze); font-size: 12px; letter-spacing: .12em; }
-    .use-case h3 { font-size: 24px; font-weight: 560; letter-spacing: -.03em; }
-    .use-case p { color: var(--muted); font-size: 14px; line-height: 1.55; }
-    .use-case-arrow { font-size: 22px; color: #6d7b84; }
-
-    .mechanism {
-      background: var(--paper);
-    }
-    .mechanism-grid {
-      display: grid;
-      grid-template-columns: 4fr 8fr;
-      gap: 70px;
-      align-items: start;
-    }
-    .mechanism-copy h2 { font-size: clamp(42px, 4.8vw, 67px); }
-    .mechanism-copy p {
-      margin-top: 30px;
-      color: var(--text);
-      font-size: 17px;
-      line-height: 1.68;
-    }
-    .mechanism-link {
-      margin-top: 31px;
-      padding-bottom: 8px;
-      display: inline-flex;
-      gap: 28px;
-      align-items: center;
-      border-bottom: 1px solid var(--ink);
-      font-size: 13px;
-      font-weight: 680;
-    }
-    .catalog-figure {
-      border: 1px solid #aeb8bd;
-      background: var(--paper-2);
-    }
-    .catalog-title {
-      padding: 18px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #aeb8bd;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-    .catalog-title span:last-child { color: var(--muted); letter-spacing: .04em; text-transform: none; }
-    .catalog-body { padding: 26px; }
-    .catalog-flow {
-      display: grid;
-      grid-template-columns: 2fr 3.4fr 2.2fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    .catalog-column { display: grid; gap: 8px; }
-    .catalog-column-label {
-      margin-bottom: 4px;
-      color: var(--muted);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-    .catalog-node {
-      min-height: 44px;
-      padding: 10px 12px;
-      display: flex;
-      align-items: center;
-      border: 1px solid #bfc7ca;
-      color: #31414c;
-      font-size: 11px;
-      line-height: 1.3;
-      background: #fff;
-    }
-    .catalog-core {
-      padding: 22px;
-      border: 1px solid var(--navy);
-      background: var(--navy);
-      color: white;
-    }
-    .catalog-core .core-small { color: #9fb0ba; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
-    .catalog-core h3 { margin: 12px 0 21px; font-size: 27px; font-weight: 540; letter-spacing: -.04em; }
-    .core-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .core-grid span {
-      min-height: 42px;
-      padding: 8px;
-      display: flex;
-      align-items: center;
-      border-top: 1px solid rgba(255,255,255,.25);
-      color: #d8e0e4;
-      font-size: 10px;
-      line-height: 1.25;
-    }
-    .catalog-foot {
-      margin-top: 22px;
-      padding-top: 17px;
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      border-top: 1px solid #c8ced0;
-      color: var(--muted);
-      font-size: 10px;
-      line-height: 1.45;
-    }
-
-    .audience-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--ink);
-      border-left: 1px solid var(--line);
-    }
-    .audience-item {
-      min-height: 292px;
-      padding: 31px 28px;
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-    .audience-item small { color: var(--bronze); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-    .audience-item h3 { margin: 48px 0 20px; font-size: 24px; font-weight: 560; letter-spacing: -.03em; }
-    .audience-item p { color: var(--muted); font-size: 14px; line-height: 1.58; }
-
-    .closing {
-      padding: 95px 0;
-      background: #0d2235;
-      color: white;
-      border-bottom: 0;
-    }
-    .closing-grid {
-      display: grid;
-      grid-template-columns: 8fr 4fr;
-      gap: 80px;
-      align-items: end;
-    }
-    .closing h2 { max-width: 850px; }
-    .closing p { max-width: 680px; margin-top: 26px; color: #c8d2d8; font-size: 17px; line-height: 1.65; }
-    .closing-actions { display: grid; gap: 10px; }
-
-    footer { background: #061421; color: #9eafb9; }
-    .footer-top {
-      padding: 54px 0 46px;
-      display: grid;
-      grid-template-columns: 4fr repeat(3, 2fr);
-      gap: 44px;
-      border-bottom: 1px solid rgba(255,255,255,.14);
-    }
-    .footer-brand { color: white; font-size: 19px; font-weight: 700; letter-spacing: -.03em; }
-    .footer-desc { max-width: 330px; margin-top: 15px; color: #8fa1ac; font-size: 13px; line-height: 1.55; }
-    .footer-col strong { display: block; margin-bottom: 16px; color: white; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
-    .footer-col a { display: block; margin: 10px 0; font-size: 13px; }
-    .footer-bottom { min-height: 70px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; }
-
-    @media (max-width: 1040px) {
-      .wrap { width: min(var(--max), calc(100% - 48px)); }
-      .header-inner { grid-template-columns: 1fr auto; }
-      .nav { display: none; }
-      .menu { display: inline-flex; width: 42px; height: 42px; align-items: center; justify-content: center; border: 1px solid #aeb8bd; background: transparent; color: var(--navy); }
-      .header-action { display: none; }
-      .hero { min-height: auto; }
-      .hero-lower { grid-template-columns: 1fr 1fr; }
-      .hero-copy { grid-column: 1 / -1; }
-      .section-head, .obligation-grid, .mechanism-grid { grid-template-columns: 1fr; }
-      .section-head { gap: 20px; }
-      .estate-grid { grid-template-columns: 1fr; gap: 22px; }
-      .arrow-col { min-height: 30px; transform: rotate(90deg); }
-      .diagram-col { padding: 0; }
-      .translation-box { min-height: auto; }
-      .estate-note { grid-template-columns: 1fr; gap: 10px; }
-      .audience-grid { grid-template-columns: 1fr 1fr; }
-      .closing-grid { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 2fr 1fr 1fr; }
-      .footer-col:last-child { display: none; }
-    }
-
-    @media (max-width: 720px) {
-      .wrap { width: calc(100% - 32px); }
-      .header-inner { min-height: 64px; }
-      .hero { padding: 62px 0 50px; }
-      .kicker { margin-bottom: 30px; }
-      h1 { font-size: clamp(49px, 15vw, 72px); }
-      .hero-lower { margin-top: 48px; grid-template-columns: 1fr; gap: 25px; }
-      .hero-audience { padding: 22px 0 0; border-left: 0; border-top: 1px solid var(--line-dark); }
-      .hero-actions { grid-template-columns: 1fr; }
-      .section { padding: 78px 0; }
-      h2 { font-size: 43px; }
-      .section-head { margin-bottom: 44px; }
-      .obligation-grid { gap: 42px; }
-      .timeline-row { grid-template-columns: 44px 1fr; padding: 18px 0; }
-      .timeline-text { grid-column: 2; margin-top: 9px; }
-      .twin { grid-template-columns: 1fr; }
-      .twin-panel, .twin-panel + .twin-panel { padding: 36px 0; border-left: 0; }
-      .twin-panel + .twin-panel { border-top: 1px solid var(--line); }
-      .use-case { grid-template-columns: 42px 1fr 24px; gap: 12px; padding: 23px 0; }
-      .use-case p { grid-column: 2; }
-      .catalog-flow { grid-template-columns: 1fr; }
-      .catalog-foot { display: grid; }
-      .audience-grid { grid-template-columns: 1fr; }
-      .audience-item { min-height: auto; }
-      .audience-item h3 { margin-top: 28px; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .footer-top > div:first-child { grid-column: 1 / -1; }
-      .footer-bottom { align-items: flex-start; flex-direction: column; justify-content: center; gap: 7px; }
-    }
-  </style>
-
-  <style>
-    /* Layout and typography refinement — institutional editorial pass */
-    :root { --max: 1320px; }
-
-    body {
-      letter-spacing: 0;
-    }
-
-    p { text-wrap: pretty; }
-
-    .wrap {
-      width: min(var(--max), calc(100% - 144px));
-    }
-
-    .header-inner {
-      min-height: 86px;
-      grid-template-columns: minmax(300px, 350px) 1fr auto;
-      gap: 44px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      font-size: 21px;
-      font-weight: 700;
-      letter-spacing: -.025em;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .brand span {
-      display: block;
-      max-width: 142px;
-      margin-left: 18px;
-      padding-left: 18px;
-      border-left: 1px solid #c5cbce;
-      color: #786646;
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: .135em;
-      line-height: 1.35;
-      vertical-align: baseline;
-      white-space: normal;
-    }
-
-    .nav {
-      gap: 36px;
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    .nav a { padding-block: 34px; }
-
-    .header-action {
-      min-height: 42px;
-      padding-inline: 18px;
-      font-size: 12px;
-      font-weight: 650;
-    }
-
-    .hero {
-      min-height: 790px;
-      padding: 104px 0 82px;
-    }
-
-    .kicker {
-      gap: 17px;
-      margin-bottom: 54px;
-      font-size: 10px;
-      letter-spacing: .18em;
-      line-height: 1.4;
-    }
-
-    h1 {
-      max-width: 1040px;
-      font-size: clamp(62px, 7vw, 104px);
-      line-height: .995;
-      letter-spacing: -.043em;
-      font-weight: 500;
-      text-wrap: balance;
-    }
-
-    .hero-lower {
-      margin-top: 82px;
-      padding-top: 32px;
-      grid-template-columns: minmax(0, 7.2fr) minmax(210px, 2.3fr) minmax(210px, 2.5fr);
-      gap: 52px;
-    }
-
-    .hero-copy {
-      max-width: 700px;
-      font-size: 18px;
-      line-height: 1.72;
-    }
-
-    .hero-audience {
-      padding-left: 26px;
-    }
-
-    .hero-audience small,
-    .mini-label {
-      margin-bottom: 12px;
-      font-size: 9px;
-      line-height: 1.4;
-    }
-
-    .hero-audience p {
-      font-size: 14px;
-      line-height: 1.62;
-    }
-
-    .hero-actions { gap: 11px; }
-
-    .btn {
-      min-height: 48px;
-      padding-inline: 19px;
-      font-size: 12px;
-      font-weight: 650;
-    }
-
-    .section { padding: 128px 0 124px; }
-
-    .section-head {
-      grid-template-columns: minmax(170px, 2.4fr) minmax(0, 9.6fr);
-      gap: 64px;
-      margin-bottom: 78px;
-    }
-
-    .section-number {
-      padding-top: 8px;
-      font-size: 10px;
-      letter-spacing: .17em;
-      line-height: 1.5;
-    }
-
-    h2 {
-      max-width: 900px;
-      font-size: clamp(42px, 4.75vw, 69px);
-      font-weight: 500;
-      line-height: 1.055;
-      letter-spacing: -.038em;
-      text-wrap: balance;
-    }
-
-    .section-intro {
-      max-width: 730px;
-      margin-top: 30px;
-      font-size: 18px;
-      line-height: 1.72;
-    }
-
-    .obligation-grid {
-      grid-template-columns: minmax(270px, 3.6fr) minmax(0, 8.4fr);
-      gap: 82px;
-    }
-
-    .obligation-copy p {
-      margin-bottom: 25px;
-      font-size: 16px;
-      line-height: 1.78;
-    }
-
-    .timeline-row {
-      min-height: auto;
-      grid-template-columns: 74px minmax(150px, .9fr) minmax(0, 1.7fr);
-      gap: 18px;
-      padding: 25px 0;
-    }
-
-    .timeline-index { font-size: 11px; }
-    .timeline-title {
-      font-size: 19px;
-      line-height: 1.25;
-      letter-spacing: -.018em;
-    }
-    .timeline-text {
-      font-size: 14px;
-      line-height: 1.62;
-    }
-
-    .estate-diagram {
-      padding: 48px 0 16px;
-    }
-
-    .estate-grid {
-      grid-template-columns: minmax(180px, 2.15fr) 58px minmax(245px, 2.75fr) 58px minmax(300px, 4.1fr);
-    }
-
-    .diagram-col { padding: 0; }
-
-    .diagram-label {
-      min-height: 0;
-      margin-bottom: 20px;
-      font-size: 9px;
-      letter-spacing: .17em;
-      line-height: 1.5;
-    }
-
-    .source-list, .system-list { gap: 10px; }
-
-    .source-item, .system-item {
-      min-height: 56px;
-      padding: 0 17px;
-      font-size: 13px;
-      line-height: 1.42;
-    }
-
-    .translation-box {
-      min-height: 320px;
-      padding: 25px;
-    }
-
-    .translation-box strong {
-      margin-bottom: 22px;
-      font-size: 18px;
-      line-height: 1.35;
-    }
-
-    .translation-box li {
-      padding: 12px 0;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .arrow-col { font-size: 24px; }
-
-    .estate-note {
-      margin-top: 40px;
-      padding: 27px 0 7px;
-      grid-template-columns: minmax(170px, 2.4fr) minmax(0, 9.6fr);
-      gap: 64px;
-      font-size: 14px;
-      line-height: 1.68;
-    }
-
-    .estate-note strong {
-      padding-top: 3px;
-      font-size: 10px;
-      line-height: 1.5;
-    }
-
-    .twin-panel {
-      padding: 52px 66px 58px 0;
-    }
-
-    .twin-panel + .twin-panel {
-      padding-left: 66px;
-    }
-
-    .twin-panel .label {
-      margin-bottom: 36px;
-      font-size: 10px;
-      letter-spacing: .16em;
-    }
-
-    .twin-panel h3 {
-      max-width: 510px;
-      margin-bottom: 23px;
-      font-size: 29px;
-      line-height: 1.18;
-      letter-spacing: -.027em;
-    }
-
-    .twin-panel p {
-      max-width: 520px;
-      font-size: 16px;
-      line-height: 1.75;
-    }
-
-    .twin-list { margin-top: 34px; }
-    .twin-list div {
-      min-height: 60px;
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-    .use-case {
-      grid-template-columns: 70px minmax(250px, 3.2fr) minmax(0, 6.8fr) 24px;
-      gap: 30px;
-      min-height: 124px;
-      padding: 10px 0;
-    }
-
-    .use-case h3 {
-      font-size: 23px;
-      line-height: 1.25;
-      letter-spacing: -.024em;
-    }
-
-    .use-case p {
-      max-width: 650px;
-      font-size: 14px;
-      line-height: 1.62;
-    }
-
-    .mechanism-grid {
-      grid-template-columns: minmax(310px, 3.7fr) minmax(0, 8.3fr);
-      gap: 88px;
-    }
-
-    .mechanism-copy h2 {
-      margin-top: 22px;
-      font-size: clamp(42px, 4.6vw, 64px);
-      line-height: 1.06;
-    }
-
-    .mechanism-copy p {
-      margin-top: 29px;
-      font-size: 16px;
-      line-height: 1.76;
-    }
-
-    .mechanism-link {
-      margin-top: 34px;
-      padding-bottom: 10px;
-    }
-
-    .catalog-title {
-      padding: 20px 24px;
-      font-size: 10px;
-      line-height: 1.45;
-    }
-
-    .catalog-body { padding: 30px; }
-
-    .catalog-flow {
-      grid-template-columns: minmax(145px, 2fr) minmax(280px, 3.6fr) minmax(130px, 2fr);
-      gap: 22px;
-    }
-
-    .catalog-column { gap: 10px; }
-    .catalog-column-label {
-      margin-bottom: 7px;
-      line-height: 1.4;
-    }
-
-    .catalog-node {
-      min-height: 48px;
-      padding: 11px 13px;
-      font-size: 11px;
-      line-height: 1.4;
-    }
-
-    .catalog-core { padding: 26px; }
-
-    .catalog-core h3 {
-      margin: 14px 0 24px;
-      font-size: 28px;
-      line-height: 1.08;
-    }
-
-    .core-grid { gap: 9px; }
-    .core-grid span {
-      min-height: 46px;
-      padding: 10px 8px;
-      line-height: 1.35;
-    }
-
-    .catalog-foot {
-      margin-top: 26px;
-      padding-top: 20px;
-      gap: 40px;
-      font-size: 10px;
-      line-height: 1.55;
-    }
-
-    .audience-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .audience-item {
-      min-height: 270px;
-      padding: 40px 42px 44px;
-    }
-
-    .audience-item h3 {
-      max-width: 420px;
-      margin: 38px 0 20px;
-      font-size: 27px;
-      line-height: 1.2;
-      letter-spacing: -.026em;
-    }
-
-    .audience-item p {
-      max-width: 490px;
-      font-size: 15px;
-      line-height: 1.68;
-    }
-
-    .closing {
-      padding: 112px 0 106px;
-    }
-
-    .closing-grid {
-      grid-template-columns: minmax(0, 8.3fr) minmax(260px, 3.7fr);
-      gap: 96px;
-    }
-
-    .closing h2 {
-      max-width: 860px;
-      line-height: 1.055;
-    }
-
-    .closing p {
-      max-width: 650px;
-      margin-top: 30px;
-      font-size: 17px;
-      line-height: 1.72;
-    }
-
-    .footer-top {
-      padding: 62px 0 54px;
-      gap: 58px;
-    }
-
-    .footer-desc {
-      margin-top: 18px;
-      line-height: 1.65;
-    }
-
-    .footer-col strong {
-      margin-bottom: 19px;
-    }
-
-    .footer-col a { margin: 12px 0; }
-    .footer-bottom { min-height: 76px; }
-
-    @media (max-width: 1180px) {
-      .wrap { width: min(var(--max), calc(100% - 72px)); }
-      .header-inner {
-        grid-template-columns: minmax(260px, 310px) 1fr auto;
-        gap: 28px;
-      }
-      .nav { gap: 24px; }
-      .hero-lower { gap: 36px; }
-      .estate-grid {
-        grid-template-columns: minmax(170px, 2fr) 42px minmax(225px, 2.7fr) 42px minmax(270px, 4fr);
-      }
-      .mechanism-grid { gap: 64px; }
-    }
-
-    @media (max-width: 1040px) {
-      .wrap { width: min(var(--max), calc(100% - 48px)); }
-      .header-inner { grid-template-columns: 1fr auto; }
-      .hero { padding-top: 88px; }
-      .hero-lower { grid-template-columns: 1fr 1fr; }
-      .section-head,
-      .obligation-grid,
-      .mechanism-grid { grid-template-columns: 1fr; }
-      .section-head { gap: 24px; }
-      .section-number { padding-top: 0; }
-      .estate-grid { grid-template-columns: 1fr; gap: 24px; }
-      .estate-note { grid-template-columns: 1fr; gap: 12px; }
-      .catalog-flow { grid-template-columns: 1fr; }
-      .closing-grid { grid-template-columns: 1fr; gap: 54px; }
-    }
-
-    @media (max-width: 720px) {
-      .wrap { width: calc(100% - 32px); }
-      .brand span { display: none; }
-      .hero {
-        padding: 68px 0 54px;
-      }
-      .kicker { margin-bottom: 34px; }
-      h1 {
-        font-size: clamp(48px, 13.5vw, 66px);
-        line-height: 1.02;
-        letter-spacing: -.034em;
-      }
-      .hero-lower {
-        margin-top: 54px;
-        padding-top: 26px;
-        gap: 28px;
-      }
-      .hero-copy {
-        font-size: 17px;
-        line-height: 1.7;
-      }
-      .section { padding: 86px 0 82px; }
-      h2 {
-        font-size: 41px;
-        line-height: 1.08;
-        letter-spacing: -.03em;
-      }
-      .section-head { margin-bottom: 48px; }
-      .section-intro {
-        margin-top: 24px;
-        font-size: 17px;
-        line-height: 1.68;
-      }
-      .obligation-grid { gap: 44px; }
-      .timeline-row {
-        grid-template-columns: 42px 1fr;
-        gap: 10px 14px;
-        padding: 22px 0;
-      }
-      .timeline-text { grid-column: 2; margin-top: 2px; }
-      .twin-panel,
-      .twin-panel + .twin-panel {
-        padding: 40px 0 44px;
-      }
-      .use-case {
-        grid-template-columns: 40px 1fr 20px;
-        gap: 12px;
-        min-height: auto;
-        padding: 26px 0;
-      }
-      .use-case p { grid-column: 2; }
-      .catalog-body { padding: 22px; }
-      .catalog-core { padding: 22px; }
-      .audience-grid { grid-template-columns: 1fr; }
-      .audience-item {
-        min-height: auto;
-        padding: 34px 30px 38px;
-      }
-      .audience-item h3 { margin-top: 28px; }
-      .closing { padding: 88px 0 82px; }
-      .footer-top { gap: 40px 28px; }
-    }
-  </style>
+  <meta name="description" content="Oversee structures the requirements that define an insurance product and deploys them into the carrier's technology estate. Insurance product infrastructure for carriers.">
+  <title>Oversee — Insurance Product Infrastructure</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Oversee">
+  <meta property="og:title" content="Oversee — Insurance Product Infrastructure">
+  <meta property="og:description" content="Insurance products cost too much to launch and maintain. Oversee structures the requirements that define a product and deploys them into the carrier's technology estate.">
+  <meta property="og:url" content="https://oversee-ai.com/">
+  <meta property="og:image" content="https://oversee-ai.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
   <header class="header">
     <div class="wrap header-inner">
-      <a class="brand" href="#top" aria-label="OverseeAI home">OverseeAI<span>INSURANCE PRODUCT INFRASTRUCTURE</span></a>
+      <a class="brand" href="index.html" aria-label="Oversee home">Oversee<span>INSURANCE PRODUCT INFRASTRUCTURE</span></a>
       <nav class="nav" aria-label="Primary navigation">
-        <a href="#problems">Problems we solve</a>
+        <a href="#problem">The problem</a>
         <a href="#platform">Platform</a>
         <a href="#teams">Who we serve</a>
-        <a href="#research">Research</a>
-        <a href="#company">Company</a>
+        <a href="perspectives.html">Perspectives</a>
+        <a href="about.html">The firm</a>
       </nav>
-      <a class="header-action" href="#contact">Speak with OverseeAI</a>
-      <button class="menu" aria-label="Open menu">☰</button>
+      <a class="header-action" href="contact.html">Request a briefing</a>
+      <button class="menu" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+    <div class="mobile-panel">
+      <div class="wrap">
+        <a href="#problem">The problem</a>
+        <a href="#platform">Platform</a>
+        <a href="#teams">Who we serve</a>
+        <a href="perspectives.html">Perspectives</a>
+        <a href="about.html">The firm</a>
+        <a href="contact.html">Request a briefing →</a>
+      </div>
     </div>
   </header>
 
@@ -1106,20 +49,20 @@
         <div class="kicker">Insurance product infrastructure</div>
         <h1>Insurance products cost too much to launch and maintain.</h1>
         <div class="hero-lower">
-          <p class="hero-copy">Every product creates a long-term commitment across filings, rates, rules, forms, underwriting requirements and the systems used to quote, bind, service and renew it. OverseeAI structures the requirements that define an insurance product and deploys them into existing or new technology stacks.</p>
+          <p class="hero-copy">Every product creates a long-term commitment across rates, rules, forms, underwriting requirements, and the systems used to quote, bind, service, and renew it. Oversee structures the requirements that define an insurance product and deploys them into the carrier&rsquo;s existing or new technology stacks.</p>
           <div class="hero-audience">
             <small>Primary audience</small>
-            <p>Built for CIOs carrying the technology cost of business-defined products.</p>
+            <p>Built for CIOs who turn business-defined products into working systems.</p>
           </div>
           <div class="hero-actions">
-            <a class="btn primary" href="#platform">Explore the platform</a>
-            <a class="btn" href="#research">Research insurance products</a>
+            <a class="btn primary" href="contact.html">Request a briefing</a>
+            <a class="btn" href="https://research.oversee-ai.com">Research insurance products</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="problem">
       <div class="wrap">
         <div class="section-head">
           <div class="section-number">01 / The obligation</div>
@@ -1131,16 +74,16 @@
 
         <div class="obligation-grid">
           <div class="obligation-copy">
-            <p>The carrier must process endorsements and renewals, handle claims under the coverage sold, maintain filed rates and forms, and keep the supporting systems operational.</p>
-            <p>Regulators protect policyholders from abrupt changes to their coverage. Customers expect the insurer to honour the contract it sold.</p>
-            <p>Each launch creates a legal, regulatory and technology commitment that continues after the launch team has moved on.</p>
+            <p>The carrier must process endorsements and renewals, handle claims under the coverage sold, maintain its rates and forms, and keep the supporting systems operational.</p>
+            <p>Regulators protect policyholders from abrupt changes to their coverage. Customers expect the insurer to honor the contract it sold.</p>
+            <p>Each launch creates a legal, regulatory, and technology commitment that continues after the launch team has moved on.</p>
           </div>
           <div class="timeline" aria-label="Insurance product obligation timeline">
-            <div class="timeline-row"><div class="timeline-index">01</div><div class="timeline-title">File</div><div class="timeline-text">Rates, rules, forms and coverage are submitted to regulators.</div></div>
+            <div class="timeline-row"><div class="timeline-index">01</div><div class="timeline-title">Commit</div><div class="timeline-text">Rates, rules, forms, and coverage are set — internally, and with regulators where required.</div></div>
             <div class="timeline-row"><div class="timeline-index">02</div><div class="timeline-title">Issue</div><div class="timeline-text">Policies create contractual obligations to customers.</div></div>
-            <div class="timeline-row"><div class="timeline-index">03</div><div class="timeline-title">Service</div><div class="timeline-text">The product must remain operable across policy, billing, documents and distribution.</div></div>
+            <div class="timeline-row"><div class="timeline-index">03</div><div class="timeline-title">Service</div><div class="timeline-text">The product must remain operable across policy, billing, documents, and distribution.</div></div>
             <div class="timeline-row"><div class="timeline-index">04</div><div class="timeline-title">Renew and endorse</div><div class="timeline-text">Existing policies continue after new-business priorities change.</div></div>
-            <div class="timeline-row"><div class="timeline-index">05</div><div class="timeline-title">Maintain</div><div class="timeline-text">The product and the systems that support it remain part of the carrier’s estate.</div></div>
+            <div class="timeline-row"><div class="timeline-index">05</div><div class="timeline-title">Maintain</div><div class="timeline-text">The product and the systems that support it remain part of the carrier&rsquo;s estate.</div></div>
           </div>
         </div>
       </div>
@@ -1152,7 +95,7 @@
           <div class="section-number">02 / The technology estate</div>
           <div>
             <h2>The business defines the product. Technology implements and maintains it.</h2>
-            <p class="section-intro">Requirements usually sit across documents, filings, spreadsheets, shared drives, system configuration and individual expertise. Each platform team must interpret the same product in the language of its own stack.</p>
+            <p class="section-intro">Requirements usually sit across documents, spreadsheets, shared drives, system configuration, and individual expertise. Each platform team must interpret the same product in the language of its own stack.</p>
           </div>
         </div>
 
@@ -1164,7 +107,7 @@
                 <div class="source-item">Business requirements</div>
                 <div class="source-item">Rates and actuarial models</div>
                 <div class="source-item">Forms and endorsements</div>
-                <div class="source-item">Regulatory filings</div>
+                <div class="source-item">Regulatory and compliance requirements</div>
                 <div class="source-item">Underwriting rules</div>
               </div>
             </div>
@@ -1176,8 +119,8 @@
                   <strong>Platform-specific implementation work</strong>
                   <ul>
                     <li>Translate requirements into system metadata</li>
-                    <li>Configure rates, rules, forms and workflows</li>
-                    <li>Reconstruct expected behaviour for testing</li>
+                    <li>Configure rates, rules, forms, and workflows</li>
+                    <li>Reconstruct expected behavior for testing</li>
                     <li>Resolve gaps between documents and system logic</li>
                     <li>Maintain each implementation after release</li>
                   </ul>
@@ -1198,7 +141,7 @@
           </div>
           <div class="estate-note">
             <strong>Where the cost sits</strong>
-            <span>Software licences account for only part of the expense. The larger cost sits in the people required to interpret, configure, test, integrate and maintain the product across the carrier’s technology estate.</span>
+            <span>Software licenses account for only part of the expense. The larger cost sits in the people required to interpret, configure, test, integrate, and maintain the product across the carrier&rsquo;s technology estate.</span>
           </div>
         </div>
       </div>
@@ -1213,7 +156,7 @@
         <div class="twin">
           <article class="twin-panel">
             <div class="label">Products that never launch</div>
-            <h3>Smaller opportunities cannot always support a large implementation programme.</h3>
+            <h3>Smaller opportunities cannot always support a large implementation program.</h3>
             <p>A viable product may remain unbuilt because the implementation and maintenance costs exceed the expected return.</p>
             <div class="twin-list">
               <div>Narrower customer groups</div>
@@ -1224,11 +167,11 @@
           </article>
           <article class="twin-panel">
             <div class="label">Products that never leave</div>
-            <h3>Versions accumulate across business units, acquisitions and core systems.</h3>
+            <h3>Versions accumulate across business units, acquisitions, and core systems.</h3>
             <p>The CIO remains responsible for the estate even when the carrier cannot produce a complete structured definition of how those versions differ.</p>
             <div class="twin-list">
-              <div>Duplicated rates, rules and forms</div>
-              <div>Platform-specific product behaviour</div>
+              <div>Duplicated rates, rules, and forms</div>
+              <div>Platform-specific product behavior</div>
               <div>Acquired and inherited variants</div>
               <div>Legacy products that are expensive to retire</div>
             </div>
@@ -1242,68 +185,75 @@
         <div class="section-head">
           <div class="section-number">04 / Problems we solve</div>
           <div>
-            <h2>OverseeAI addresses the work required to launch, consolidate and move insurance products.</h2>
+            <h2>Oversee addresses the work required to launch, consolidate, and move insurance products.</h2>
           </div>
         </div>
         <div class="use-case-list">
           <a class="use-case" href="#platform"><div class="use-case-num">01</div><h3>Launch new products</h3><p>Move from business requirements to a structured product definition and the artifacts required by the systems involved in launch.</p><div class="use-case-arrow">→</div></a>
-          <a class="use-case" href="#platform"><div class="use-case-num">02</div><h3>Rationalise product variants</h3><p>Compare versions across business units and platforms before deciding which product definition to retain.</p><div class="use-case-arrow">→</div></a>
+          <a class="use-case" href="#platform"><div class="use-case-num">02</div><h3>Rationalize product variants</h3><p>Compare versions across business units and platforms before deciding which product definition to retain.</p><div class="use-case-arrow">→</div></a>
           <a class="use-case" href="#platform"><div class="use-case-num">03</div><h3>Replace legacy systems</h3><p>Reconstruct products operating inside an existing platform and generate artifacts for the target system.</p><div class="use-case-arrow">→</div></a>
-          <a class="use-case" href="#platform"><div class="use-case-num">04</div><h3>Enter new markets</h3><p>Reuse an existing product definition while applying the forms, classifications, rules and regulatory requirements of another jurisdiction.</p><div class="use-case-arrow">→</div></a>
-          <a class="use-case" href="#platform"><div class="use-case-num">05</div><h3>Support new distribution channels</h3><p>Deploy product requirements into the portals, partner systems and workflows required by a new channel.</p><div class="use-case-arrow">→</div></a>
-          <a class="use-case" href="#research"><div class="use-case-num">06</div><h3>Research competing products</h3><p>Compare competitor filings, rates, structures, coverages and forms using answers linked to the underlying documents.</p><div class="use-case-arrow">→</div></a>
+          <a class="use-case" href="#platform"><div class="use-case-num">04</div><h3>Enter new markets</h3><p>Reuse an existing product definition while applying the forms, classifications, rules, and regulatory requirements of another jurisdiction.</p><div class="use-case-arrow">→</div></a>
+          <a class="use-case" href="#platform"><div class="use-case-num">05</div><h3>Support new distribution channels</h3><p>Deploy product requirements into the portals, partner systems, and workflows required by a new channel.</p><div class="use-case-arrow">→</div></a>
+          <a class="use-case" href="https://research.oversee-ai.com"><div class="use-case-num">06</div><h3>Research competing products</h3><p>Compare competitor filings, rates, structures, coverages, and forms using answers linked to the underlying documents.</p><div class="use-case-arrow">→</div></a>
         </div>
       </div>
     </section>
 
     <section class="section mechanism" id="platform">
-      <div class="wrap mechanism-grid">
-        <div class="mechanism-copy">
-          <div class="section-number">05 / The OverseeAI platform</div>
-          <h2>One product definition across different technology stacks.</h2>
-          <p>OverseeAI structures the rates, rules, coverages, forms, classifications and variations that define an insurance product. It generates the specifications, configuration, mappings and tests required by each target system.</p>
-          <p>The carrier retains its repositories, engineering controls, testing processes and release gates.</p>
-          <a class="mechanism-link" href="#contact">See how the platform works <span>→</span></a>
-        </div>
+      <div class="wrap">
+        <div class="mechanism-grid">
+          <div class="mechanism-copy">
+            <div class="section-number">05 / The platform</div>
+            <h2>One product definition across different technology stacks.</h2>
+            <p>Oversee structures the rates, rules, coverages, forms, classifications, and variations that define an insurance product. It generates the specifications, configuration, mappings, and tests required by each target system.</p>
+            <p>The carrier retains its repositories, engineering controls, testing processes, and release gates.</p>
+            <a class="mechanism-link" href="contact.html">Arrange a working session <span>→</span></a>
+          </div>
 
-        <figure class="catalog-figure">
-          <div class="catalog-title"><span>Product definition and deployment model</span><span>Illustrative</span></div>
-          <div class="catalog-body">
-            <div class="catalog-flow">
-              <div class="catalog-column">
-                <div class="catalog-column-label">Product knowledge</div>
-                <div class="catalog-node">Requirements and specifications</div>
-                <div class="catalog-node">Rates and actuarial logic</div>
-                <div class="catalog-node">Forms and regulatory material</div>
-                <div class="catalog-node">Existing system configuration</div>
-              </div>
-              <div class="catalog-core">
-                <div class="core-small">Carrier-owned product definition</div>
-                <h3>OverseeAI Product Catalog</h3>
-                <div class="core-grid">
-                  <span>Rates and calculations</span>
-                  <span>Rules and eligibility</span>
-                  <span>Coverages and limits</span>
-                  <span>Forms and endorsements</span>
-                  <span>Classifications</span>
-                  <span>Versions and variations</span>
+          <figure class="catalog-figure">
+            <div class="catalog-title"><span>Product definition and deployment model</span><span>Illustrative</span></div>
+            <div class="catalog-body">
+              <div class="catalog-flow">
+                <div class="catalog-column">
+                  <div class="catalog-column-label">Product knowledge</div>
+                  <div class="catalog-node">Requirements and specifications</div>
+                  <div class="catalog-node">Rates and actuarial logic</div>
+                  <div class="catalog-node">Forms and regulatory material</div>
+                  <div class="catalog-node">Existing system configuration</div>
+                </div>
+                <div class="catalog-core">
+                  <div class="core-small">Carrier-owned product definition</div>
+                  <h3>Oversee Product Catalog</h3>
+                  <div class="core-grid">
+                    <span>Rates and calculations</span>
+                    <span>Rules and eligibility</span>
+                    <span>Coverages and limits</span>
+                    <span>Forms and endorsements</span>
+                    <span>Classifications</span>
+                    <span>Versions and variations</span>
+                  </div>
+                </div>
+                <div class="catalog-column">
+                  <div class="catalog-column-label">Target environments</div>
+                  <div class="catalog-node">Guidewire</div>
+                  <div class="catalog-node">Duck Creek</div>
+                  <div class="catalog-node">Majesco</div>
+                  <div class="catalog-node">Custom and legacy</div>
+                  <div class="catalog-node">Oversee Run</div>
                 </div>
               </div>
-              <div class="catalog-column">
-                <div class="catalog-column-label">Target environments</div>
-                <div class="catalog-node">Guidewire</div>
-                <div class="catalog-node">Duck Creek</div>
-                <div class="catalog-node">Majesco</div>
-                <div class="catalog-node">Custom and legacy</div>
-                <div class="catalog-node">OverseeAI Run</div>
+              <div class="catalog-foot">
+                <span>Versioned product requirements remain independent of any single core platform.</span>
+                <span>Generated artifacts move through the carrier&rsquo;s existing review and release process.</span>
               </div>
             </div>
-            <div class="catalog-foot">
-              <span>Versioned product requirements remain independent of any single core platform.</span>
-              <span>Generated artifacts move through the carrier’s existing review and release process.</span>
-            </div>
-          </div>
-        </figure>
+          </figure>
+        </div>
+
+        <aside class="disclosure" aria-label="Platform access">
+          <strong>Platform access</strong>
+          <p>Documentation, architecture, and working sessions with the platform are available to carriers under NDA.</p>
+        </aside>
       </div>
     </section>
 
@@ -1314,40 +264,83 @@
           <div><h2>Built for the people accountable for the product and the systems that carry it.</h2></div>
         </div>
         <div class="audience-grid">
-          <article class="audience-item"><small>01</small><h3>Chief information officers</h3><p>Reduce the platform-specific work required to launch, maintain, consolidate and migrate insurance products.</p></article>
-          <article class="audience-item"><small>02</small><h3>Product and actuarial leaders</h3><p>Maintain requirements in a structured form that can be reviewed, versioned and reused by implementation teams.</p></article>
-          <article class="audience-item"><small>03</small><h3>Platform and engineering teams</h3><p>Receive specifications, configuration and tests while retaining control of review, deployment and production release.</p></article>
-          <article class="audience-item"><small>04</small><h3>Business leaders</h3><p>Evaluate product opportunities without assuming that every launch requires another bespoke implementation programme.</p></article>
+          <article class="audience-item"><small>01</small><h3>Chief information officers</h3><p>Reduce the platform-specific work required to launch, maintain, consolidate, and migrate insurance products.</p></article>
+          <article class="audience-item"><small>02</small><h3>Product and actuarial leaders</h3><p>Maintain requirements in a structured form that can be reviewed, versioned, and reused by implementation teams.</p></article>
+          <article class="audience-item"><small>03</small><h3>Platform and engineering teams</h3><p>Receive specifications, configuration, and tests while retaining control of review, deployment, and production release.</p></article>
+          <article class="audience-item"><small>04</small><h3>Chief underwriting officers</h3><p>Open new segments, programs, and jurisdictions without committing to another bespoke implementation program.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="closing" id="research">
+    <section class="section" id="perspectives">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-number">07 / Perspectives</div>
+          <div>
+            <h2>Writing on how insurance products are actually built.</h2>
+            <p class="section-intro">We publish selectively on product economics and the realities of implementation.</p>
+          </div>
+        </div>
+        <div class="perspective-list">
+          <a class="perspective" href="https://oversee-ai.com/blog/why-pc-insurance-product-development-takes-time-the-human-complexity-behind-the-process/"><div class="perspective-num">01</div><h3>Why P&amp;C insurance product development takes time</h3><p>The human complexity behind the process.</p><div class="perspective-arrow">→</div></a>
+          <a class="perspective" href="https://oversee-ai.com/blog/ai-wont-transform-insurance-your-people-will-a-people-first-framework-for-ai-enablement-in-insurance/"><div class="perspective-num">02</div><h3>AI won&rsquo;t transform insurance. Your people will.</h3><p>A people-first framework for AI-enablement in insurance.</p><div class="perspective-arrow">→</div></a>
+          <a class="perspective" href="https://oversee-ai.com/blog/the-new-measure-of-ai-progress-in-insurance/"><div class="perspective-num">03</div><h3>The new measure of AI progress in insurance</h3><p>A new phase of operational realism.</p><div class="perspective-arrow">→</div></a>
+        </div>
+        <a class="perspectives-foot" href="perspectives.html">All perspectives <span>→</span></a>
+      </div>
+    </section>
+
+    <section class="section firm" id="firm">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-number">08 / The firm</div>
+          <div>
+            <h2>Built for the duration of the obligations our clients carry.</h2>
+            <p class="section-intro">Oversee works with a limited number of carriers at a time, in engagements led by senior people. We would rather be permanent than prominent.</p>
+          </div>
+        </div>
+        <div class="firm-grid">
+          <article class="firm-item"><small>Offices</small><h3>Boston &middot; London &middot; Mumbai</h3><p>Working with carriers across US, London, and international markets.</p></article>
+          <article class="firm-item"><small>Structure</small><h3>Privately held</h3><p>A deliberately small senior team, sized to the work rather than to a sales motion.</p></article>
+          <article class="firm-item"><small>Security</small><h3>SOC 2</h3><p>Compliance documentation is available in our <a href="https://app.vanta.com/oversee-ai.com/trust/2rp7evcq8fqyggqlsvmrow">trust center</a>.</p></article>
+          <article class="firm-item"><small>Engagement</small><h3>Under NDA</h3><p>The carrier retains its repositories, engineering controls, testing processes, and release gates.</p></article>
+        </div>
+        <a class="mechanism-link" style="margin-top: 48px;" href="about.html">About the firm <span>→</span></a>
+      </div>
+    </section>
+
+    <section class="closing" id="contact">
       <div class="wrap closing-grid">
         <div>
           <div class="kicker">Insurance product infrastructure</div>
           <h2>Structure the product once. Use it across the systems where it operates.</h2>
-          <p>OverseeAI supports product research, implementation, testing, deployment and maintenance from a carrier-owned product definition.</p>
+          <p>Oversee supports product research, implementation, testing, deployment, and maintenance from a carrier-owned product definition.</p>
         </div>
-        <div class="closing-actions" id="contact">
-          <a class="btn primary" href="mailto:info@oversee-ai.com">Speak with OverseeAI</a>
+        <div class="closing-actions">
+          <a class="btn primary" href="contact.html">Request a briefing</a>
           <a class="btn" href="https://research.oversee-ai.com">Research insurance products</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer id="company">
+  <footer>
     <div class="wrap footer-top">
       <div>
-        <div class="footer-brand">OverseeAI</div>
-        <p class="footer-desc">Insurance product infrastructure for carriers launching, consolidating and modernising products across complex technology estates.</p>
+        <div class="footer-brand">Oversee</div>
+        <p class="footer-desc">Insurance product infrastructure for carriers launching, consolidating, and modernizing products across complex technology estates.</p>
+        <div class="footer-offices">Boston &middot; London &middot; Mumbai</div>
       </div>
-      <div class="footer-col"><strong>Platform</strong><a href="#platform">Product Catalog</a><a href="#platform">Architecture</a><a href="#platform">Security</a></div>
-      <div class="footer-col"><strong>Products</strong><a href="#research">Research</a><a href="#platform">Build</a><a href="#platform">Run</a></div>
-      <div class="footer-col"><strong>Company</strong><a href="#company">About</a><a href="#company">Careers</a><a href="mailto:info@oversee-ai.com">Contact</a></div>
+      <div class="footer-col"><strong>Platform</strong><a href="index.html#platform">Product Catalog</a><a href="https://research.oversee-ai.com">Research</a><a href="https://app.vanta.com/oversee-ai.com/trust/2rp7evcq8fqyggqlsvmrow">Trust center</a></div>
+      <div class="footer-col"><strong>Perspectives</strong><a href="perspectives.html">All writing</a><a href="https://oversee-ai.com/insights/">Archive</a></div>
+      <div class="footer-col"><strong>The firm</strong><a href="about.html">About</a><a href="https://oversee-ai.com/careers/">Careers</a><a href="contact.html">Contact</a></div>
     </div>
-    <div class="wrap footer-bottom"><span>© 2026 OverseeAI. All rights reserved.</span><span>Privacy · Terms · Security</span></div>
+    <div class="wrap footer-bottom">
+      <span>&copy; 2026 OverseeAI. All rights reserved.</span>
+      <span><a href="https://oversee-ai.com/privacy-policy/">Privacy</a> &middot; <a href="https://oversee-ai.com/terms-and-conditions">Terms</a> &middot; <a href="https://oversee-ai.com/service-level-agreement">Service Level Agreement</a></span>
+    </div>
   </footer>
+
+  <script src="site.js"></script>
 </body>
 </html>
