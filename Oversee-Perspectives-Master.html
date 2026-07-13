@@ -1,0 +1,1658 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The collected Perspectives essays from Oversee in a single self-contained file.">
+  <title>Perspectives, collected — Oversee</title>
+  <style>
+/* ============================================================
+   Oversee — shared stylesheet
+   Serif display (Iowan/Palatino/Georgia) + grotesk labels
+   ============================================================ */
+
+:root {
+  --navy: #0a1c2e;
+  --navy-2: #10283d;
+  --ink: #14222f;
+  --text: #2c3a46;
+  --muted: #5f6e7a;
+  --paper: #f2eee3;
+  --paper-2: #faf8f2;
+  --white: #ffffff;
+  --line: #d2d4cf;
+  --line-dark: rgba(255,255,255,.21);
+  --bronze: #8f7444;
+  --bronze-soft: #a58a5c;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --max: 1320px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper-2);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p { margin: 0; }
+p { text-wrap: pretty; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+.wrap { width: min(var(--max), calc(100% - 144px)); margin-inline: auto; }
+
+/* ---------- Masthead ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(250,248,242,.96);
+  border-top: 3px solid var(--bronze);
+  border-bottom: 1px solid #d6d8d2;
+  backdrop-filter: blur(10px);
+}
+.header-inner {
+  min-height: 86px;
+  display: grid;
+  grid-template-columns: minmax(300px, 360px) 1fr auto;
+  align-items: center;
+  gap: 44px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: -.012em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.brand span {
+  display: block;
+  max-width: 148px;
+  margin-left: 18px;
+  padding-left: 18px;
+  border-left: 1px solid #c6c9c2;
+  color: #786646;
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  line-height: 1.4;
+  white-space: normal;
+}
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 34px;
+  color: #3d4b55;
+  font-size: 13px;
+  font-weight: 500;
+}
+.nav a { padding-block: 34px; border-bottom: 1px solid transparent; }
+.nav a:hover, .nav a[aria-current="page"] { border-bottom-color: var(--navy); }
+.header-action {
+  min-height: 42px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--navy);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .02em;
+  transition: background .18s ease, color .18s ease;
+}
+.header-action:hover { background: var(--navy); color: var(--white); }
+.menu {
+  display: none;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #b3b6ae;
+  background: transparent;
+  color: var(--navy);
+  font-size: 16px;
+  cursor: pointer;
+}
+.mobile-panel { display: none; border-top: 1px solid #d6d8d2; }
+.mobile-panel.open { display: block; }
+.mobile-panel a {
+  display: block;
+  padding: 15px 0;
+  border-bottom: 1px solid #e3e4de;
+  font-size: 14px;
+  font-weight: 500;
+}
+.mobile-panel a:last-child { border-bottom: 0; font-weight: 650; }
+
+/* ---------- Hero (home) ---------- */
+.hero {
+  min-height: 780px;
+  padding: 104px 0 84px;
+  color: var(--white);
+  background: var(--navy);
+  border-bottom: 1px solid #24384a;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.032) 1px, transparent 1px);
+  background-size: 84px 84px;
+  mask-image: linear-gradient(to bottom, transparent 0, rgba(0,0,0,.6) 45%, #000 100%);
+}
+.hero-inner { position: relative; z-index: 1; }
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-bottom: 56px;
+  color: #bcc9d1;
+  font-size: 10px;
+  font-weight: 680;
+  letter-spacing: .19em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.kicker::before { content: ""; width: 38px; height: 1px; background: #a28657; }
+h1 {
+  max-width: 1060px;
+  font-family: var(--serif);
+  font-size: clamp(54px, 6.4vw, 96px);
+  line-height: 1.04;
+  letter-spacing: -.022em;
+  font-weight: 400;
+  text-wrap: balance;
+}
+.hero-lower {
+  margin-top: 72px;
+  padding-top: 34px;
+  border-top: 1px solid var(--line-dark);
+  display: grid;
+  grid-template-columns: minmax(0, 8.6fr) minmax(240px, 3.4fr);
+  gap: 64px;
+  align-items: start;
+}
+.hero-copy {
+  max-width: 680px;
+  color: #d8dfe4;
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.72;
+}
+.hero-audience { padding-left: 26px; border-left: 1px solid var(--line-dark); }
+.hero-audience small,
+.mini-label {
+  display: block;
+  margin-bottom: 12px;
+  color: #92a6b3;
+  font-size: 9px;
+  font-weight: 680;
+  letter-spacing: .15em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.hero-audience p { color: #f1f4f5; font-size: 15px; line-height: 1.62; }
+.hero-actions { display: grid; gap: 11px; }
+.btn {
+  min-height: 44px;
+  padding: 2px 2px 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,.4);
+  background: transparent;
+  color: white;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .02em;
+  transition: border-color .18s ease, background .18s ease;
+}
+.btn::after { content: "→"; font-size: 15px; font-weight: 400; }
+.btn:hover { border-bottom-color: #fff; }
+.btn.primary {
+  min-height: 48px;
+  padding: 0 19px;
+  border: 1px solid #fff;
+  background: white;
+  color: var(--navy);
+}
+.btn.primary:hover { background: #e7ecef; }
+
+/* ---------- Section scaffolding ---------- */
+section { border-bottom: 1px solid var(--line); }
+.section { padding: 126px 0 122px; }
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(170px, 2.4fr) minmax(0, 9.6fr);
+  gap: 64px;
+  margin-bottom: 76px;
+}
+.section-number {
+  padding-top: 10px;
+  color: var(--bronze);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .17em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+h2 {
+  max-width: 920px;
+  font-family: var(--serif);
+  font-size: clamp(38px, 4.7vw, 66px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -.017em;
+  text-wrap: balance;
+}
+.section-intro {
+  max-width: 720px;
+  margin-top: 28px;
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+/* ---------- Subpage head ---------- */
+.page-head {
+  padding: 100px 0 78px;
+  border-bottom: 1px solid var(--line);
+}
+.page-head .kicker { color: var(--muted); margin-bottom: 44px; }
+.page-head h1 {
+  max-width: 980px;
+  font-size: clamp(42px, 5vw, 74px);
+  line-height: 1.08;
+  letter-spacing: -.018em;
+}
+.page-head .section-intro { max-width: 760px; }
+
+/* ---------- Prose ---------- */
+.prose { max-width: 720px; }
+.prose p {
+  margin-bottom: 25px;
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.76;
+}
+.prose p:last-child { margin-bottom: 0; }
+
+/* ---------- 01 · Obligation ---------- */
+.obligation-grid {
+  display: grid;
+  grid-template-columns: minmax(270px, 3.6fr) minmax(0, 8.4fr);
+  gap: 82px;
+  align-items: start;
+}
+.obligation-copy p {
+  margin-bottom: 24px;
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.76;
+}
+.obligation-copy p:last-child { margin-bottom: 0; }
+.timeline { border-top: 1px solid var(--ink); }
+.timeline-row {
+  display: grid;
+  grid-template-columns: 74px minmax(150px, .9fr) minmax(0, 1.7fr);
+  gap: 18px;
+  align-items: center;
+  padding: 25px 0;
+  border-bottom: 1px solid var(--line);
+}
+.timeline-index { color: var(--bronze); font-size: 11px; letter-spacing: .12em; }
+.timeline-title {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+}
+.timeline-text { color: var(--muted); font-size: 15px; line-height: 1.65; }
+
+/* ---------- 02 · Estate (dark) ---------- */
+.dark-section { background: var(--navy); color: white; border-bottom-color: #24384a; }
+.dark-section .section-number { color: #b99a65; }
+.dark-section .section-intro { color: #c9d2d8; }
+
+.estate-diagram {
+  position: relative;
+  padding: 48px 0 16px;
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+}
+.estate-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(180px, 2.15fr) minmax(245px, 2.75fr) minmax(300px, 4.1fr);
+  column-gap: clamp(56px, 6vw, 110px);
+  align-items: stretch;
+}
+.arrow-col { display: none; }
+.diagram-col { padding: 0; }
+.diagram-label {
+  margin-bottom: 20px;
+  color: #97abb8;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .17em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.source-list, .system-list { display: grid; gap: 10px; }
+.source-item, .system-item, .translation-box {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 17px;
+  border: 1px solid rgba(255,255,255,.23);
+  color: #edf2f4;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.translation-box {
+  min-height: 320px;
+  align-items: flex-start;
+  padding: 25px;
+  background: rgba(255,255,255,.045);
+}
+.translation-box strong {
+  display: block;
+  margin-bottom: 22px;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -.01em;
+}
+.translation-box ul { margin: 0; padding: 0; list-style: none; }
+.translation-box li {
+  padding: 12px 0;
+  border-top: 1px solid rgba(255,255,255,.14);
+  color: #c4d0d6;
+  font-size: 14px;
+  line-height: 1.52;
+}
+.arrow-col { place-items: center; color: #8297a5; font-size: 24px; }
+.system-item { justify-content: space-between; }
+.system-item span:last-child { color: #879ca9; font-size: 11px; }
+.estate-note {
+  margin-top: 40px;
+  padding: 27px 0 7px;
+  display: grid;
+  grid-template-columns: minmax(170px, 2.4fr) minmax(0, 9.6fr);
+  gap: 64px;
+  border-top: 1px solid rgba(255,255,255,.14);
+  color: #c9d2d8;
+  font-size: 15px;
+  line-height: 1.68;
+}
+.estate-note strong {
+  padding-top: 3px;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: .09em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+/* ---------- 03 · Consequence ---------- */
+.twin { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--ink); }
+.twin-panel { padding: 52px 66px 58px 0; }
+.twin-panel + .twin-panel { padding-left: 66px; padding-right: 0; border-left: 1px solid var(--line); }
+.twin-panel .label {
+  margin-bottom: 36px;
+  color: var(--bronze);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.twin-panel h3 {
+  max-width: 510px;
+  margin-bottom: 23px;
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 500;
+  line-height: 1.24;
+  letter-spacing: -.012em;
+}
+.twin-panel p { max-width: 520px; color: var(--text); font-size: 16px; line-height: 1.75; }
+.twin-list { margin-top: 34px; border-top: 1px solid var(--line); }
+.twin-list div {
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  color: #34434e;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ---------- 04 · Use cases ---------- */
+.use-case-list { border-top: 1px solid var(--ink); }
+.use-case {
+  display: grid;
+  grid-template-columns: 70px minmax(250px, 3.2fr) minmax(0, 6.8fr) 24px;
+  gap: 30px;
+  align-items: center;
+  min-height: 122px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  transition: background .18s ease;
+}
+.use-case:hover { background: #efece3; }
+.use-case-num { color: var(--bronze); font-size: 12px; letter-spacing: .12em; }
+.use-case h3 {
+  font-family: var(--serif);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.012em;
+}
+.use-case p { max-width: 650px; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.use-case-arrow { font-size: 20px; color: #6d7b84; }
+
+/* ---------- 05 · Platform ---------- */
+.mechanism { background: var(--paper); }
+.mechanism-grid {
+  display: grid;
+  grid-template-columns: minmax(310px, 3.7fr) minmax(0, 8.3fr);
+  gap: 88px;
+  align-items: start;
+}
+.mechanism-copy h2 { margin-top: 22px; font-size: clamp(38px, 4.4vw, 60px); line-height: 1.12; }
+.mechanism-copy p {
+  margin-top: 28px;
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.74;
+}
+.mechanism-link {
+  margin-top: 34px;
+  padding-bottom: 10px;
+  display: inline-flex;
+  gap: 28px;
+  align-items: center;
+  border-bottom: 1px solid var(--ink);
+  font-size: 13px;
+  font-weight: 650;
+}
+.catalog-figure { margin: 0; border: 1px solid #a9b0ab; background: var(--paper-2); }
+.catalog-title {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #a9b0ab;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+.catalog-title span:last-child { color: var(--muted); letter-spacing: .04em; text-transform: none; }
+.catalog-body { padding: 30px; }
+.catalog-flow {
+  display: grid;
+  grid-template-columns: minmax(145px, 2fr) minmax(280px, 3.6fr) minmax(130px, 2fr);
+  gap: 22px;
+  align-items: stretch;
+}
+.catalog-column { display: grid; gap: 10px; align-content: start; }
+.catalog-column-label {
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.catalog-node {
+  min-height: 48px;
+  padding: 11px 13px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #bcc2bc;
+  color: #31414c;
+  font-size: 12px;
+  line-height: 1.42;
+  background: #fff;
+}
+.catalog-core { padding: 26px; border: 1px solid var(--navy); background: var(--navy); color: white; }
+.catalog-core .core-small { color: #9fb0ba; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+.catalog-core h3 {
+  margin: 14px 0 24px;
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -.012em;
+}
+.core-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.core-grid span {
+  min-height: 46px;
+  padding: 10px 8px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,.25);
+  color: #d8e0e4;
+  font-size: 11px;
+  line-height: 1.38;
+}
+.catalog-foot {
+  margin-top: 26px;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  border-top: 1px solid #c4cac4;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.disclosure + .disclosure { margin-top: 14px; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--bronze-soft);
+  outline-offset: 3px;
+}
+.disclosure {
+  margin-top: 72px;
+  padding: 36px 40px;
+  border: 1px solid var(--ink);
+  background: var(--paper-2);
+  display: grid;
+  grid-template-columns: minmax(170px, 2.4fr) minmax(0, 9.6fr);
+  gap: 64px;
+  align-items: start;
+}
+.disclosure strong {
+  padding-top: 4px;
+  color: var(--bronze);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.disclosure p {
+  max-width: 760px;
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.72;
+}
+
+/* ---------- 06 · Audiences ---------- */
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--line);
+}
+.audience-item {
+  min-height: 264px;
+  padding: 40px 42px 44px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.audience-item small { color: var(--bronze); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.audience-item h3 {
+  max-width: 420px;
+  margin: 36px 0 20px;
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: -.012em;
+}
+.audience-item p { max-width: 490px; color: var(--muted); font-size: 15px; line-height: 1.68; }
+
+/* ---------- 07 · Perspectives ---------- */
+.perspective-list { border-top: 1px solid var(--ink); }
+.perspective {
+  display: grid;
+  grid-template-columns: 70px minmax(260px, 6.4fr) minmax(0, 4.6fr) 24px;
+  gap: 30px;
+  align-items: center;
+  min-height: 118px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  transition: background .18s ease;
+}
+.perspective:hover { background: #efece3; }
+.perspective-num { color: var(--bronze); font-size: 12px; letter-spacing: .12em; }
+.perspective h3 {
+  max-width: 620px;
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -.012em;
+}
+.perspective p { color: var(--muted); font-size: 15px; line-height: 1.62; }
+.perspective-arrow { font-size: 20px; color: #6d7b84; }
+.perspectives-foot {
+  margin-top: 44px;
+  display: inline-flex;
+  gap: 28px;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ink);
+  font-size: 13px;
+  font-weight: 650;
+}
+.agenda-list { border-top: 1px solid var(--ink); }
+.agenda-item {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 30px;
+  align-items: center;
+  min-height: 88px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.agenda-item h3 {
+  max-width: 720px;
+  font-family: var(--serif);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -.012em;
+}
+.archive-note {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.archive-note a { border-bottom: 1px solid #9aa39f; }
+.archive-note a:hover { border-bottom-color: var(--ink); color: var(--ink); }
+
+/* ---------- 08 · The firm ---------- */
+.firm { background: var(--paper); }
+.firm-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid #c8ccc4;
+}
+.firm-item {
+  min-height: 250px;
+  padding: 34px 32px 38px;
+  border-right: 1px solid #c8ccc4;
+  border-bottom: 1px solid #c8ccc4;
+}
+.firm-item small {
+  display: block;
+  color: var(--bronze);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.firm-item h3 {
+  margin: 40px 0 16px;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: -.01em;
+}
+.firm-item p { color: var(--muted); font-size: 15px; line-height: 1.66; }
+.firm-item a { border-bottom: 1px solid #9aa39f; }
+.firm-item a:hover { border-bottom-color: var(--ink); color: var(--ink); }
+
+/* ---------- Leadership bios ---------- */
+.bio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--line);
+}
+.bio-item {
+  min-height: 300px;
+  padding: 38px 36px 42px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.bio-item small {
+  display: block;
+  color: var(--bronze);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.bio-item h3 {
+  margin: 42px 0 14px;
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: -.012em;
+}
+.bio-item p { max-width: 340px; color: var(--muted); font-size: 15px; line-height: 1.68; }
+.bio-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #9aa39f;
+  font-size: 12px;
+  font-weight: 650;
+}
+.bio-link:hover { border-bottom-color: var(--ink); }
+
+/* ---------- Contact / briefing ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(280px, 4fr);
+  gap: 96px;
+  align-items: start;
+}
+.briefing-form { border-top: 1px solid var(--ink); padding-top: 40px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.form-field { display: grid; gap: 9px; margin-bottom: 24px; }
+.form-field label {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.form-field input,
+.form-field textarea {
+  min-height: 52px;
+  padding: 13px 15px;
+  border: 1px solid #b6bab0;
+  border-radius: 0;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.form-field textarea { min-height: 170px; resize: vertical; }
+.form-field input:focus,
+.form-field textarea:focus { outline: none; border-color: var(--navy); }
+.btn-solid {
+  min-height: 50px;
+  padding: 0 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 26px;
+  border: 1px solid var(--navy);
+  background: var(--navy);
+  color: white;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: background .18s ease;
+}
+.btn-solid::after { content: "→"; font-size: 15px; font-weight: 400; }
+.btn-solid:hover { background: var(--navy-2); }
+.form-note { margin-top: 20px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.form-note a { border-bottom: 1px solid #9aa39f; }
+.form-note a:hover { border-bottom-color: var(--ink); color: var(--ink); }
+
+.side-info { border-top: 1px solid var(--ink); }
+.side-info > div { padding: 26px 0; border-bottom: 1px solid var(--line); }
+.side-info small {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--bronze);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.side-info p { color: var(--text); font-size: 15px; line-height: 1.6; }
+.side-info a { border-bottom: 1px solid #9aa39f; }
+.side-info a:hover { border-bottom-color: var(--ink); color: var(--ink); }
+
+/* ---------- Article (Perspectives essay) ---------- */
+.article-head { padding: 96px 0 60px; border-bottom: 1px solid var(--line); }
+.article-head .kicker { color: var(--muted); margin-bottom: 40px; }
+.article-head h1 { max-width: 900px; font-size: clamp(38px, 4.6vw, 62px); line-height: 1.12; }
+.article-meta {
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: .04em;
+}
+.article { padding: 84px 0 108px; border-bottom: 1px solid var(--line); }
+.article-body { max-width: 720px; }
+.article-body p {
+  margin: 0 0 26px;
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.78;
+}
+.article-body h2 {
+  margin: 56px 0 22px;
+  font-size: 29px;
+  line-height: 1.26;
+  letter-spacing: -.012em;
+}
+.article-body .pull {
+  margin: 42px 0 26px;
+  padding-left: 26px;
+  border-left: 2px solid var(--bronze);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 23px;
+  line-height: 1.52;
+}
+.article-foot {
+  max-width: 720px;
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.62;
+}
+.article-foot a { border-bottom: 1px solid #9aa39f; }
+.article-foot a:hover { border-bottom-color: var(--ink); color: var(--ink); }
+
+/* ---------- Closing ---------- */
+.closing { padding: 112px 0 106px; background: #0d2235; color: white; border-bottom: 0; }
+.closing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 8.3fr) minmax(260px, 3.7fr);
+  gap: 96px;
+  align-items: end;
+}
+.closing h2 { max-width: 860px; }
+.closing p {
+  max-width: 640px;
+  margin-top: 30px;
+  color: #c8d2d8;
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.7;
+}
+.closing-actions { display: grid; gap: 10px; }
+
+/* ---------- Footer ---------- */
+footer { background: #061421; color: #9eafb9; }
+.footer-top {
+  padding: 62px 0 54px;
+  display: grid;
+  grid-template-columns: 4fr repeat(3, 2fr);
+  gap: 58px;
+  border-bottom: 1px solid rgba(255,255,255,.14);
+}
+.footer-brand {
+  color: white;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+}
+.footer-desc { max-width: 340px; margin-top: 18px; color: #97a8b2; font-size: 14px; line-height: 1.65; }
+.footer-offices {
+  margin-top: 22px;
+  color: #7d919d;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.footer-col strong { display: block; margin-bottom: 19px; color: white; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.footer-col a { display: block; margin: 12px 0; font-size: 14px; }
+.footer-col a:hover { color: #d7dfe3; }
+.footer-bottom {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 11px;
+}
+.footer-bottom a:hover { color: #d7dfe3; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1180px) {
+  .wrap { width: min(var(--max), calc(100% - 72px)); }
+  .header-inner { grid-template-columns: minmax(260px, 310px) 1fr auto; gap: 28px; }
+  .nav { gap: 24px; }
+  .hero-lower { gap: 36px; }
+  .estate-grid { grid-template-columns: minmax(170px, 2fr) minmax(225px, 2.7fr) minmax(270px, 4fr); column-gap: 64px; }
+  .mechanism-grid { gap: 64px; }
+  .contact-grid { gap: 64px; }
+}
+
+@media (max-width: 1040px) {
+  .wrap { width: min(var(--max), calc(100% - 48px)); }
+  .header-inner { grid-template-columns: 1fr auto; }
+  .nav { display: none; }
+  .menu { display: inline-flex; }
+  .header-action { display: none; }
+  .hero { min-height: auto; padding-top: 88px; }
+  .hero-lower { grid-template-columns: 1fr; gap: 32px; }
+  .section-head, .obligation-grid, .mechanism-grid { grid-template-columns: 1fr; }
+  .section-head { gap: 24px; }
+  .section-number { padding-top: 0; }
+  .estate-grid { grid-template-columns: 1fr; gap: 24px; }
+  .arrow-col { display: grid; min-height: 30px; transform: rotate(90deg); }
+  .estate-lines, .diagram-hint { display: none; }
+  .translation-box { min-height: auto; }
+  .estate-note { grid-template-columns: 1fr; gap: 12px; }
+  .catalog-flow { grid-template-columns: 1fr; }
+  .disclosure { grid-template-columns: 1fr; gap: 18px; padding: 30px 32px; }
+  .audience-grid { grid-template-columns: 1fr 1fr; }
+  .firm-grid { grid-template-columns: 1fr 1fr; }
+  .bio-grid { grid-template-columns: 1fr; }
+  .bio-item { min-height: auto; }
+  .contact-grid { grid-template-columns: 1fr; gap: 54px; }
+  .closing-grid { grid-template-columns: 1fr; gap: 54px; }
+  .footer-top { grid-template-columns: 2fr 1fr 1fr; }
+  .footer-col:last-child { display: none; }
+}
+
+@media (max-width: 720px) {
+  .wrap { width: calc(100% - 32px); }
+  .header-inner { min-height: 64px; }
+  .brand { font-size: 22px; }
+  .brand span { display: none; }
+  .hero { padding: 68px 0 54px; }
+  .kicker { margin-bottom: 34px; }
+  h1 { font-size: clamp(42px, 11.5vw, 58px); line-height: 1.08; letter-spacing: -.016em; }
+  .hero-lower { margin-top: 54px; padding-top: 26px; grid-template-columns: 1fr; gap: 28px; }
+  .hero-audience { padding: 22px 0 0; border-left: 0; border-top: 1px solid var(--line-dark); }
+  .hero-actions { grid-template-columns: 1fr; }
+  .hero-copy { font-size: 17px; line-height: 1.7; }
+  .section { padding: 86px 0 82px; }
+  h2 { font-size: 34px; line-height: 1.16; letter-spacing: -.012em; }
+  .section-head { margin-bottom: 48px; }
+  .section-intro { margin-top: 24px; font-size: 17px; line-height: 1.68; }
+  .page-head { padding: 70px 0 60px; }
+  .page-head h1 { font-size: clamp(36px, 9.5vw, 48px); }
+  .obligation-grid { gap: 44px; }
+  .timeline-row { grid-template-columns: 42px 1fr; gap: 10px 14px; padding: 22px 0; }
+  .timeline-text { grid-column: 2; margin-top: 2px; }
+  .twin { grid-template-columns: 1fr; }
+  .twin-panel, .twin-panel + .twin-panel { padding: 40px 0 44px; border-left: 0; }
+  .twin-panel + .twin-panel { border-top: 1px solid var(--line); }
+  .use-case { grid-template-columns: 40px 1fr 20px; gap: 12px; min-height: auto; padding: 26px 0; }
+  .use-case p { grid-column: 2; }
+  .catalog-body { padding: 22px; }
+  .catalog-core { padding: 22px; }
+  .disclosure { margin-top: 52px; padding: 26px 24px; }
+  .audience-grid { grid-template-columns: 1fr; }
+  .audience-item { min-height: auto; padding: 34px 30px 38px; }
+  .audience-item h3 { margin-top: 28px; }
+  .perspective { grid-template-columns: 40px 1fr 20px; gap: 12px; min-height: auto; padding: 26px 0; }
+  .perspective p { grid-column: 2; }
+  .agenda-item { grid-template-columns: 40px 1fr; gap: 12px; min-height: auto; padding: 22px 0; }
+  .article-head { padding: 66px 0 48px; }
+  .article-head h1 { font-size: clamp(32px, 8.5vw, 42px); }
+  .article { padding: 62px 0 78px; }
+  .article-body p { font-size: 17px; line-height: 1.72; }
+  .article-body h2 { margin-top: 44px; font-size: 25px; }
+  .article-body .pull { font-size: 20px; }
+  .firm-grid { grid-template-columns: 1fr; }
+  .firm-item { min-height: auto; padding: 30px 26px 34px; }
+  .firm-item h3 { margin-top: 26px; }
+  .bio-item { padding: 32px 26px 36px; }
+  .bio-item h3 { margin-top: 30px; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .closing { padding: 88px 0 82px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px 28px; }
+  .footer-top > div:first-child { grid-column: 1 / -1; }
+  .footer-bottom { align-items: flex-start; flex-direction: column; justify-content: center; gap: 7px; padding-block: 18px; }
+}
+
+/* ============================================================
+   Brand device — the open seal (prototype)
+   Corner brackets: the frame around the product.
+   ============================================================ */
+
+.brand { font-size: 27px; letter-spacing: -.008em; }
+
+.brand-mark {
+  width: 15px;
+  height: 15px;
+  margin-right: 13px;
+  flex: none;
+  background-image:
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze)),
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze)),
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze)),
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze));
+  background-position: top left, top left, top right, top right, bottom left, bottom left, bottom right, bottom right;
+  background-size: 6px 1.5px, 1.5px 6px, 6px 1.5px, 1.5px 6px, 6px 1.5px, 1.5px 6px, 6px 1.5px, 1.5px 6px;
+  background-repeat: no-repeat;
+}
+
+/* Hero: the premise, held in the open seal */
+.hero-statement {
+  margin-top: 66px;
+  display: grid;
+  grid-template-columns: minmax(140px, 2.4fr) minmax(0, 9.6fr);
+  gap: 64px;
+  align-items: start;
+  padding: 30px 38px 36px;
+  background-image:
+    linear-gradient(rgba(165,138,92,.55), rgba(165,138,92,.55)), linear-gradient(rgba(165,138,92,.55), rgba(165,138,92,.55)),
+    linear-gradient(rgba(165,138,92,.55), rgba(165,138,92,.55)), linear-gradient(rgba(165,138,92,.55), rgba(165,138,92,.55)),
+    linear-gradient(rgba(165,138,92,.55), rgba(165,138,92,.55)), linear-gradient(rgba(165,138,92,.55), rgba(165,138,92,.55)),
+    linear-gradient(rgba(165,138,92,.55), rgba(165,138,92,.55)), linear-gradient(rgba(165,138,92,.55), rgba(165,138,92,.55));
+  background-position: top left, top left, top right, top right, bottom left, bottom left, bottom right, bottom right;
+  background-size: 44px 1.5px, 1.5px 44px, 44px 1.5px, 1.5px 44px, 44px 1.5px, 1.5px 44px, 44px 1.5px, 1.5px 44px;
+  background-repeat: no-repeat;
+}
+.hero-statement small {
+  display: block;
+  padding-top: 8px;
+  color: #92a6b3;
+  font-size: 9px;
+  font-weight: 680;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.hero-statement p {
+  margin: 0;
+  max-width: 880px;
+  color: #eef3f5;
+  font-family: var(--serif);
+  font-size: clamp(21px, 1.9vw, 29px);
+  line-height: 1.42;
+  letter-spacing: -.014em;
+}
+
+/* Section numbers: a corner tick */
+.section-number {
+  padding: 14px 0 0 16px;
+  background-image:
+    linear-gradient(var(--bronze-soft), var(--bronze-soft)), linear-gradient(var(--bronze-soft), var(--bronze-soft));
+  background-position: top left, top left;
+  background-size: 13px 1.5px, 1.5px 13px;
+  background-repeat: no-repeat;
+}
+
+/* The Catalog figure: held in the frame */
+.catalog-figure {
+  border: 0;
+  background-color: var(--paper-2);
+  background-image:
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze)),
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze)),
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze)),
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze));
+  background-position: top left, top left, top right, top right, bottom left, bottom left, bottom right, bottom right;
+  background-size: 30px 1.5px, 1.5px 30px, 30px 1.5px, 1.5px 30px, 30px 1.5px, 1.5px 30px, 30px 1.5px, 1.5px 30px;
+  background-repeat: no-repeat;
+}
+
+/* The Product Catalog core: brackets on navy */
+.catalog-core {
+  background-image:
+    linear-gradient(rgba(184,153,101,.9), rgba(184,153,101,.9)), linear-gradient(rgba(184,153,101,.9), rgba(184,153,101,.9)),
+    linear-gradient(rgba(184,153,101,.9), rgba(184,153,101,.9)), linear-gradient(rgba(184,153,101,.9), rgba(184,153,101,.9)),
+    linear-gradient(rgba(184,153,101,.9), rgba(184,153,101,.9)), linear-gradient(rgba(184,153,101,.9), rgba(184,153,101,.9)),
+    linear-gradient(rgba(184,153,101,.9), rgba(184,153,101,.9)), linear-gradient(rgba(184,153,101,.9), rgba(184,153,101,.9));
+  background-position: top left, top left, top right, top right, bottom left, bottom left, bottom right, bottom right;
+  background-size: 22px 1.5px, 1.5px 22px, 22px 1.5px, 1.5px 22px, 22px 1.5px, 1.5px 22px, 22px 1.5px, 1.5px 22px;
+  background-repeat: no-repeat;
+}
+
+/* Asides: open seal instead of full border */
+.disclosure {
+  border: 0;
+  padding: 42px 46px;
+  background-image:
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze)),
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze)),
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze)),
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze));
+  background-position: top left, top left, top right, top right, bottom left, bottom left, bottom right, bottom right;
+  background-size: 26px 1.5px, 1.5px 26px, 26px 1.5px, 1.5px 26px, 26px 1.5px, 1.5px 26px, 26px 1.5px, 1.5px 26px;
+  background-repeat: no-repeat;
+}
+
+/* Essay pull quotes: opening and closing marks */
+.article-body .pull {
+  border-left: 0;
+  margin: 46px 0 30px;
+  padding: 20px 26px;
+  background-image:
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze)),
+    linear-gradient(var(--bronze), var(--bronze)), linear-gradient(var(--bronze), var(--bronze));
+  background-position: top left, top left, bottom right, bottom right;
+  background-size: 22px 1.5px, 1.5px 22px, 22px 1.5px, 1.5px 22px;
+  background-repeat: no-repeat;
+}
+
+/* Footer: the closed seal */
+.footer-seal {
+  display: inline-block;
+  padding: 13px 26px 15px;
+  border: 1px solid rgba(165,138,92,.55);
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: .015em;
+}
+
+/* The consequence: four beats */
+.beat-list { border-top: 1px solid var(--ink); }
+.beat {
+  display: grid;
+  grid-template-columns: 70px minmax(220px, 3.2fr) minmax(0, 6.8fr);
+  gap: 30px;
+  align-items: start;
+  padding: 32px 0 36px;
+  border-bottom: 1px solid var(--line);
+}
+.beat small { padding-top: 8px; color: var(--bronze); font-size: 12px; letter-spacing: .12em; }
+.beat h3 {
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -.014em;
+}
+.beat p { margin: 0; max-width: 660px; color: var(--muted); font-size: 15px; line-height: 1.66; }
+
+@media (max-width: 720px) {
+  .brand { font-size: 24px; }
+  .brand-mark { width: 13px; height: 13px; margin-right: 10px; }
+  .disclosure { padding: 30px 28px; }
+  .section-number { padding: 12px 0 0 14px; }
+  .hero-statement { grid-template-columns: 1fr; gap: 14px; margin-top: 44px; padding: 24px 22px 28px; }
+  .hero-statement small { padding-top: 0; }
+  .beat { grid-template-columns: 40px 1fr; gap: 12px; padding: 26px 0; }
+  .beat p { grid-column: 2; }
+}
+
+/* ============================================================
+   Estate diagram — connective flow (interactive)
+   ============================================================ */
+
+.estate-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.flow-path {
+  fill: none;
+  stroke: rgba(255,255,255,.15);
+  stroke-width: 1;
+  transition: opacity .25s ease;
+}
+.flow-node { fill: rgba(255,255,255,.32); transition: opacity .25s ease; }
+.flow-path.hot {
+  stroke: #b89965;
+  stroke-width: 1.4;
+  stroke-dasharray: 5 7;
+  animation: flow-dash 1.1s linear infinite;
+}
+.flow-node.hot { fill: #b89965; }
+@keyframes flow-dash { to { stroke-dashoffset: -12; } }
+
+.estate-diagram.focused .flow-path:not(.hot),
+.estate-diagram.focused .flow-node:not(.hot) { opacity: .18; }
+
+.source-item, .system-item {
+  cursor: default;
+  transition: border-color .22s ease, background .22s ease, opacity .25s ease;
+}
+.translation-box { transition: border-color .22s ease, background .22s ease, opacity .25s ease; }
+.source-item:hover, .system-item:hover {
+  border-color: rgba(255,255,255,.45);
+  background: rgba(255,255,255,.03);
+}
+.source-item:focus-visible, .system-item:focus-visible, .translation-box:focus-visible {
+  outline: 2px solid var(--bronze-soft);
+  outline-offset: 2px;
+}
+.estate-diagram.focused .source-item:not(.hot),
+.estate-diagram.focused .system-item:not(.hot),
+.estate-diagram.focused .translation-box:not(.hot) { opacity: .38; }
+.source-item.hot, .system-item.hot {
+  border-color: rgba(184,153,101,.9);
+  background: rgba(184,153,101,.06);
+}
+.translation-box.hot {
+  border-color: rgba(184,153,101,.65);
+  background: rgba(184,153,101,.07);
+}
+
+.diagram-hint {
+  margin-top: 26px;
+  color: #7f93a1;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* The stack: translation work as carbon copies, once per system */
+.translation-box {
+  margin: 0 32px 32px 0;
+  background: #0e2438;
+  box-shadow:
+    8px 8px 0 -1px #0a1c2e, 8px 8px 0 0 rgba(255,255,255,.20),
+    16px 16px 0 -1px #0a1c2e, 16px 16px 0 0 rgba(255,255,255,.15),
+    24px 24px 0 -1px #0a1c2e, 24px 24px 0 0 rgba(255,255,255,.11),
+    32px 32px 0 -1px #0a1c2e, 32px 32px 0 0 rgba(255,255,255,.07);
+}
+.translation-box.hot {
+  box-shadow:
+    8px 8px 0 -1px #0a1c2e, 8px 8px 0 0 rgba(184,153,101,.55),
+    16px 16px 0 -1px #0a1c2e, 16px 16px 0 0 rgba(184,153,101,.40),
+    24px 24px 0 -1px #0a1c2e, 24px 24px 0 0 rgba(184,153,101,.28),
+    32px 32px 0 -1px #0a1c2e, 32px 32px 0 0 rgba(184,153,101,.18);
+}
+.stack-note {
+  margin-top: 18px;
+  color: #8fa3b1;
+  font-size: 12px;
+  line-height: 1.5;
+}
+@media (max-width: 720px) {
+  .translation-box {
+    margin: 0 20px 20px 0;
+    box-shadow:
+      7px 7px 0 -1px #0a1c2e, 7px 7px 0 0 rgba(255,255,255,.18),
+      14px 14px 0 -1px #0a1c2e, 14px 14px 0 0 rgba(255,255,255,.12),
+      21px 21px 0 -1px #0a1c2e, 21px 21px 0 0 rgba(255,255,255,.08);
+  }
+}
+
+/* Staggered reveal on first view */
+.estate-diagram.js-anim:not(.settled) .source-item,
+.estate-diagram.js-anim:not(.settled) .translation-box,
+.estate-diagram.js-anim:not(.settled) .system-item {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .55s ease var(--d, 0s), transform .55s ease var(--d, 0s);
+}
+.estate-diagram.js-anim.revealed:not(.settled) .source-item,
+.estate-diagram.js-anim.revealed:not(.settled) .translation-box,
+.estate-diagram.js-anim.revealed:not(.settled) .system-item {
+  opacity: 1;
+  transform: none;
+}
+.source-list .source-item:nth-child(1) { --d: .05s; }
+.source-list .source-item:nth-child(2) { --d: .12s; }
+.source-list .source-item:nth-child(3) { --d: .19s; }
+.source-list .source-item:nth-child(4) { --d: .26s; }
+.source-list .source-item:nth-child(5) { --d: .33s; }
+.translation-box { --d: .48s; }
+.system-list .system-item:nth-child(1) { --d: .62s; }
+.system-list .system-item:nth-child(2) { --d: .69s; }
+.system-list .system-item:nth-child(3) { --d: .76s; }
+.system-list .system-item:nth-child(4) { --d: .83s; }
+.system-list .system-item:nth-child(5) { --d: .90s; }
+.estate-diagram.js-anim:not(.settled) .estate-lines { opacity: 0; transition: opacity .9s ease .95s; }
+.estate-diagram.js-anim.revealed:not(.settled) .estate-lines { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .estate-diagram.js-anim:not(.settled) .source-item,
+  .estate-diagram.js-anim:not(.settled) .translation-box,
+  .estate-diagram.js-anim:not(.settled) .system-item { opacity: 1; transform: none; transition: none; }
+  .estate-diagram.js-anim:not(.settled) .estate-lines { opacity: 1; transition: none; }
+  .flow-path.hot { animation: none; }
+}
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="https://oversee-ai.com" aria-label="Oversee home"><span class="brand-mark" aria-hidden="true"></span>oversee</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="wrap">
+        <div class="kicker">Perspectives</div>
+        <h1>Writing on how insurance products are actually built.</h1>
+        <p class="section-intro">The collected essays in one file, July 2026. Also published at oversee-ai.com.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-number">Contents</div>
+          <div><h2>Seven essays on product economics and the realities of implementation.</h2></div>
+        </div>
+        <div class="perspective-list">
+          <a class="perspective" href="#essay-1"><div class="perspective-num">01</div><h3>Insurance is an industry of exceptions</h3><p>Two insurers, two billing philosophies, and why product differences are the value, not the noise.</p><div class="perspective-arrow">→</div></a>
+          <a class="perspective" href="#essay-2"><div class="perspective-num">02</div><h3>Core systems should execute products, not define them</h3><p>Why product launches stay slow and expensive after a core transformation.</p><div class="perspective-arrow">→</div></a>
+          <a class="perspective" href="#essay-3"><div class="perspective-num">03</div><h3>When software becomes easy to generate</h3><p>Coding agents change the economics of implementation. The constraint moves to coherence.</p><div class="perspective-arrow">→</div></a>
+          <a class="perspective" href="#essay-4"><div class="perspective-num">04</div><h3>The same engineer, one month later</h3><p>Why the product definition, not the latest session, has to be the source of authority.</p><div class="perspective-arrow">→</div></a>
+          <a class="perspective" href="#essay-5"><div class="perspective-num">05</div><h3>That one is fine, though</h3><p>The named platform is usually the comfortable part. The work is in the customized commercial lines system beside it.</p><div class="perspective-arrow">→</div></a>
+          <a class="perspective" href="#essay-6"><div class="perspective-num">06</div><h3>The quote form shaped the product</h3><p>Personal lines asked fewer questions until the products got simpler. What conversational quoting requires underneath.</p><div class="perspective-arrow">→</div></a>
+          <a class="perspective" href="#essay-7"><div class="perspective-num">07</div><h3>Restraint is not rewarded in insurance product design</h3><p>A product managed twenty years ago, reconstructed from its filings: everything added, nothing removed.</p><div class="perspective-arrow">→</div></a>
+        </div>
+      </div>
+    </section>
+
+<section class="article-head" id="essay-1">
+      <div class="wrap">
+        <div class="kicker">Perspectives</div>
+        <h1>Insurance is an industry of exceptions.</h1>
+        <p class="article-meta">Scott Field, Chief Product &amp; Technology Officer &middot; July 2026</p>
+      </div>
+    </section>
+
+<section class="article">
+      <div class="wrap">
+        <div class="article-body">
+          <p>One of the things I love about insurance is how well the people inside it understand their customers.</p>
+          <p>Last week, I spoke with two large insurers — one in North America, one in Australia. Both felt product launches had cost more than they should, and both were looking for a more cost-effective way to launch without weakening controls, adding technical complexity, or creating another pocket of shadow IT.</p>
+          <p>The conversations were similar until we started talking about billing.</p>
+          <p>Then they could not have been more different.</p>
+
+          <h2>Two very different views of a good customer experience</h2>
+          <p>The first insurer was clear that account-level billing mattered. A customer may have several products with the company, and the insurer wants to recognize the full relationship. Even if a new line could be launched quickly, it would still need to integrate with the existing billing system and preserve a complete account view.</p>
+          <p>That was not a technical preference dressed up as a business requirement. It reflected how the insurer thinks about its customers: as people with a broader relationship, not a collection of separate policies.</p>
+          <p>The second insurer took a different view entirely. It wanted payments split into as many installments as practical, spaced evenly across the policy term and kept in predictable, round-dollar amounts. Its priority was simplicity: insurance should be easy to budget for, and no customer should face one unnecessarily large payment.</p>
+          <p>Different markets, different customers, different philosophies — and both made complete sense.</p>
+
+          <h2>The exception is often the point</h2>
+          <p>Billing can look like a small detail during product design. In practice, it can affect deposits, fees, installments, rounding, mid-term changes, cancellations, refunds, documents, portals, and the systems responsible for the customer relationship. A small difference in product philosophy can reach surprisingly far into the tech stack.</p>
+          <p>That does not mean the insurer is being difficult.</p>
+          <p>It means the insurer knows its business.</p>
+          <p>Insurance products are full of decisions like this. They reflect the market being served, the way the product is distributed, the risks being written, and the experience the insurer wants to create. Those differences are not noise to be removed. They are often where the value of the product sits.</p>
+
+          <h2>Vendors should not force a choice between restriction and customization</h2>
+          <p>This is where software vendors need to be careful. A platform should not force an insurer to abandon a deliberate business decision because the standard product only supports one way of working.</p>
+          <p>But the alternative cannot be endless customization. Custom work is expensive to design, build, and test — and expensive to carry. Every upgrade, product change, regulatory update, or platform migration can reopen the same code and the same decisions. What looks like flexibility during implementation can become a permanent maintenance obligation.</p>
+          <p>Over time, the insurer may end up with a system that technically supports the business, but only through layers of bespoke configuration, integration logic, and manual process. That is not really flexibility.</p>
+          <p>It is deferred cost.</p>
+
+          <h2>The better model is structured variation</h2>
+          <p>The goal should not be to make every insurer work the same way. It should be to give insurers a clear way to define where and why they differ.</p>
+          <p>A product model, in plain terms, is a structured description of how the product is meant to work: its rates, rules, coverages, forms, classifications, billing requirements, versions, and market-specific variations. When those differences are represented as part of the product itself, they can be reviewed, tested, and implemented consistently. They do not need to be rediscovered in documents, buried in system configuration, or rebuilt as another custom branch of code.</p>
+
+          <h2>Standardization should reduce repetition, not erase difference</h2>
+          <p>There is a useful kind of standardization in insurance: the standardization of how product requirements are captured, reviewed, tested, and implemented. It is not the standardization of the business decisions themselves.</p>
+          <p>The two insurers I spoke with should not be pushed toward the same billing model. Their choices reflect what each knows about its customers. What should be common is the ability to describe those choices clearly, connect them to the systems that must support them, and maintain them without rebuilding the same logic every time the product changes.</p>
+          <p>That is the balance vendors should aim for:</p>
+          <p class="pull">Preserve what makes the insurer different. Reduce the cost of carrying that difference.</p>
+        </div>
+        <div class="article-foot">
+          <p>Scott Field is Chief Product &amp; Technology Officer at Oversee, a software company building insurance product infrastructure. More writing is available in <a href="https://oversee-ai.com/insights/">Perspectives</a>.</p>
+        </div>
+      </div>
+    </section>
+<section class="article-head" id="essay-2">
+      <div class="wrap">
+        <div class="kicker">Perspectives</div>
+        <h1>Core systems should execute products, not define them.</h1>
+        <p class="article-meta">Scott Field, Chief Product &amp; Technology Officer &middot; July 2026</p>
+      </div>
+    </section>
+
+<section class="article">
+      <div class="wrap">
+        <div class="article-body">
+          <p>I have heard a version of the same sentence from several CIOs this year: we just finished a core transformation, and we are not starting another one.</p>
+          <p>The programs were expensive and disruptive, and they delivered what they promised. The platforms are newer. The stacks are cleaner. And launching a new product still costs too much and takes too long.</p>
+          <p>The transaction platform changed. The product-definition problem did not.</p>
+          <p>Product requirements still arrive as documents, spreadsheets, actuarial models, forms, and meetings. Payment plans, eligibility rules, and forms-attachment logic still live in billing configuration, distribution systems, and the memory of whoever has supported the product for years.</p>
+          <p>A new core needs all of that translated into its own structure. A carrier that runs more than one platform translates the same product several times. A carrier that replaces a system later starts over.</p>
+          <p>A policy system should process transactions, a billing system should collect and account for payments, and a rating engine should calculate prices. Each one needs part of the product. None of them should be the only place the whole product is defined, because a carrier whose complete product lives inside one platform&rsquo;s configuration depends on that implementation for its own product knowledge.</p>
+          <p>There is a smaller move than another reset: maintain the product — the rates, rules, coverages, forms, classifications, versions, and variations — as a structured definition the carrier owns, and generate what each system needs from it. The artifacts land in the carrier&rsquo;s repositories and move through the carrier&rsquo;s release gates.</p>
+          <p class="pull">Keep the systems that execute the product. Move the definition out of them.</p>
+        </div>
+        <div class="article-foot">
+          <p>Scott Field is Chief Product &amp; Technology Officer at Oversee, a software company building insurance product infrastructure. More writing is available in <a href="https://oversee-ai.com/insights/">Perspectives</a>.</p>
+        </div>
+      </div>
+    </section>
+<section class="article-head" id="essay-3">
+      <div class="wrap">
+        <div class="kicker">Perspectives</div>
+        <h1>When software becomes easy to generate.</h1>
+        <p class="article-meta">Scott Field, Chief Product &amp; Technology Officer &middot; July 2026</p>
+      </div>
+    </section>
+
+<section class="article">
+      <div class="wrap">
+        <div class="article-body">
+          <p>A capable engineer can now describe a problem to a coding agent and have a technically credible solution running the same day. The code may be good. The tests may pass. The result may be better than what a team would have produced manually a few years ago.</p>
+          <p>That capability is real, and any argument built on pretending otherwise will age badly.</p>
+          <p>But easier software generation does not remove the hardest constraint in insurance technology — keeping every implementation&rsquo;s understanding of the product consistent. It makes that constraint more visible.</p>
+
+          <h2>The obligation outlasts the implementation</h2>
+          <p>An insurance product launch creates obligations that can last for decades. The carrier must continue to service the policies it issued: process endorsements and renewals, apply the correct rates and forms, support claims under the coverage sold, and explain which product version was in force at a particular point in time.</p>
+          <p>The team that launched it moves on, and so, eventually, do the engineers, the models, and the core platform itself. The product does not get that option. The policies written against it remain in force, renewing and producing claims for years.</p>
+          <p>This is why speed in insurance technology has to be understood carefully. Producing the first implementation quickly is valuable. But the first implementation is a small share of the product&rsquo;s lifetime cost, and the obligation it creates is long.</p>
+
+          <h2>More software does not create more control</h2>
+          <p>For most of the history of enterprise technology, software was expensive to produce. That cost limited how many local solutions an organization could create. Coding agents change those economics.</p>
+          <p>A product team creates one implementation; a platform team creates another; an acquired business keeps its own; a new distribution channel generates something tailored to its immediate needs. Each solution may be reasonable on its own. Together, they may describe the same insurance product in incompatible ways.</p>
+          <p>One team represents a coverage as configuration. Another embeds it in code. A third reconstructs it from documents whenever a change is required. Each makes different assumptions about versions, effective dates, jurisdictional variation, and precedence. The software works. The carrier&rsquo;s understanding of the product becomes less coherent.</p>
+          <p>Insurance companies already live with this. Product knowledge sits across documents, spreadsheets, system configuration, shared drives, and individual expertise, and every platform team interprets the same requirements in the language of its own tech stack. Making each interpretation faster does not remove the repetition. It speeds it up.</p>
+
+          <h2>The constraint is coherence</h2>
+          <p>The old constraint was the cost of writing software. The next one is the cost of keeping every implementation consistent.</p>
+          <p>Insurance technology is rarely built around one system, one team, or one moment in time. A carrier may need the same product to operate across several core platforms, a distribution stack, acquired systems, servicing tools, and downstream financial processes — and to support multiple generations of the product at once.</p>
+          <p>A coding agent can generate a plausible solution for any one of those environments. Every environment still depends on the same facts: which rates apply, which rules govern eligibility, which forms belong to this version, when the change became effective, where the requirement came from, and which implementations must change with it. Those facts cannot be recovered reliably by generating another implementation. They require something stable that exists independently of every implementation.</p>
+
+          <h2>What should survive</h2>
+          <p>The code may change, and in many cases it should. The carrier may replace a platform, regenerate configuration, adopt a better model, or redesign an integration. There is no reason to treat every technical artifact as permanent.</p>
+          <p>But the meaning of the product must survive those changes. The carrier needs a durable definition of its rates, rules, coverages, forms, classifications, payment plans, versions, and variations — carrier-owned, reviewable, and independent of any one core platform or implementation partner. From that definition, software and configuration can be generated again and again as the tech stack changes.</p>
+          <p>Without it, every new generation begins by reconstructing the product from documents, existing code, system behavior, and institutional memory. That is not a new problem. It is the problem insurance technology has carried for decades, now operating at the speed of modern models.</p>
+
+          <h2>Better models make the definition more important</h2>
+          <p>Coding agents will continue to improve. They will understand larger codebases, complete more of the implementation work that currently requires large engineering teams, and do it for less. That is good for insurance technology.</p>
+          <p>But the more capable the models become, the more important it is to give them something stable to work from. A model should not have to infer the insurance product differently every time it generates an artifact. It should work from a structured definition that the carrier owns and governs. That is how faster generation becomes an asset the carrier keeps, rather than another source of product sprawl.</p>
+          <p>Oversee builds software for the life of an insurance product. The platform maintains the carrier-owned product definition and generates what each core system needs. The systems can change and the models can improve; the product remains understandable, consistent, and under the carrier&rsquo;s control.</p>
+          <p class="pull">Software is becoming easier to produce. The insurance product still has to last.</p>
+        </div>
+        <div class="article-foot">
+          <p>Scott Field is Chief Product &amp; Technology Officer at Oversee, a software company building insurance product infrastructure. More writing is available in <a href="https://oversee-ai.com/insights/">Perspectives</a>.</p>
+        </div>
+      </div>
+    </section>
+<section class="article-head" id="essay-4">
+      <div class="wrap">
+        <div class="kicker">Perspectives</div>
+        <h1>The same engineer, one month later.</h1>
+        <p class="article-meta">Scott Field, Chief Product &amp; Technology Officer &middot; July 2026</p>
+      </div>
+    </section>
+
+<section class="article">
+      <div class="wrap">
+        <div class="article-body">
+          <p>Give a strong engineer a rate manual, a coding agent, and enough time to understand the target platform, and they will probably produce something impressive.</p>
+          <p>Ask the same engineer to solve the same problem one month later and the result may be different. The model may have changed. The prompt will be different. The engineer will bring different context to the task. One solution may use a configuration-driven design; another may generate code. Both may be technically sound.</p>
+          <p>That variability is one of the reasons coding agents are useful — they explore possible solutions quickly and often find approaches a team would not have considered. But insurance technology has a requirement that plausibility does not satisfy: the product must stay consistent across platforms, teams, and years.</p>
+
+          <h2>The question after the session</h2>
+          <p>The fair question for a software company like Oversee: why wouldn&rsquo;t a carrier build this itself with Claude Code?</p>
+          <p>A capable engineering team could use Claude Code to read product material and produce core-system configuration, specifications, or tests. They should experiment with it. The more useful question is what remains after the session ends.</p>
+          <p>There will be code. There may be documentation, a chat transcript, and a working implementation. What there will not be is the product — not the implementation in one target system, but the definition itself: the rates, rules, coverages, forms, classifications, payment plans, versions, and jurisdictional variations the carrier intended to implement.</p>
+          <p>If that definition does not exist independently, the next change begins by interpreting the source material again — a new endorsement arrives, a rate revision takes effect, the product enters another state, a distribution partner requires a variation, or the carrier acquires a business running another core. Someone points a model at the documents and asks for the next answer. The result may work — it may even be excellent — but it may not describe the product in quite the same way as the last answer.</p>
+
+          <h2>Small differences become permanent differences</h2>
+          <p>Insurance technology accumulates interpretations. A requirement is written in a document. One team translates it into a core platform, another into a portal, a third into a rating engine or servicing process. Over time, those interpretations drift.</p>
+          <p>Coding agents make each translation faster. They do not make the translations consistent. The same term may be represented differently by different teams. Effective dates may be handled differently. A rule may sit in configuration in one system and application code in another. A coverage variation may be explicit in one model and implied by a form selection somewhere else. None of these decisions looks wrong in isolation.</p>
+          <p>The risk appears when the carrier needs to change the product across all of them — and has to say which implementation reflects the intended product, which differences are deliberate, which are accidents of the engineer or prompt or model that generated them, and which version was in force when a policy was issued. Carriers answer those questions long after the original implementation team has moved on.</p>
+
+          <h2>The first session rewards ingenuity</h2>
+          <p>A good coding-agent session is compelling because it compresses a large amount of work into a short period of time. The first session rewards ingenuity. The hundredth product change rewards structure.</p>
+          <p>At scale, the carrier needs a consistent way to represent the product, validate changes, preserve versions, and generate artifacts for different target systems. The source of authority cannot be the most recent prompt, or whichever implementation happens to be easiest to inspect, or the engineer who remembers why a decision was made three years ago. It has to be the product definition itself.</p>
+
+          <h2>Use the coding agent</h2>
+          <p>Claude Code is a layer of software built on a model, and the model is built on years of other software, research, and infrastructure. Few engineering teams begin every project by rebuilding the layers beneath them. They choose where their own work matters and use mature tools for the rest.</p>
+          <p>Carriers should use coding agents. Their engineers should use them to understand systems, speed up implementation, generate tests, and work with the artifacts their tech stack requires. The question is what those agents are pointed at.</p>
+          <p>Point them at a folder of documents and every session rediscovers the structure of the product. Point them at existing system configuration and they reproduce the assumptions and inconsistencies already embedded there. Point them at a carrier-owned product definition and the models become interchangeable tools working from the same source of authority.</p>
+
+          <h2>Software for the product</h2>
+          <p>Oversee assumes coding models will keep improving. Individual technical capabilities inside any software platform can eventually be reproduced, and building a company on the claim that nobody else can generate similar code would be a weak position. The durable value is the asset left behind.</p>
+          <p>Oversee maintains a structured, versioned definition of the insurance product, independent of any one core platform or implementation partner. It generates the specifications, configuration, mappings, and tests required by each target system. The carrier owns the definition; the artifacts land in its repositories and move through its own review and release gates.</p>
+          <p>The next change can come from a different engineer, the next artifact from a different model, and the future execution from a different core platform — all of them beginning from the same definition. That is what insurance technology needs from this generation of AI: faster implementation without losing consistency or control.</p>
+          <p class="pull">The same engineer one month later may produce a different technical solution. They should not produce a different insurance product.</p>
+        </div>
+        <div class="article-foot">
+          <p>Scott Field is Chief Product &amp; Technology Officer at Oversee, a software company building insurance product infrastructure. More writing is available in <a href="https://oversee-ai.com/insights/">Perspectives</a>.</p>
+        </div>
+      </div>
+    </section>
+<section class="article-head" id="essay-5">
+      <div class="wrap">
+        <div class="kicker">Perspectives</div>
+        <h1>That one is fine, though.</h1>
+        <p class="article-meta">Scott Field, Chief Product &amp; Technology Officer &middot; July 2026</p>
+      </div>
+    </section>
+
+<section class="article">
+      <div class="wrap">
+        <div class="article-body">
+          <p>Our marketing names the systems we know: Guidewire, Duck Creek, DXC&rsquo;s Point and Assure, the mainframe policy platforms still carrying large books. It has to &mdash; a carrier should be able to see that we know its platform before it gives us thirty minutes.</p>
+          <p>But in most first conversations, the named system turns out to be the comfortable part. At some point someone senior says a version of the same sentence &mdash; &ldquo;yeah, that one is fine, though&rdquo; &mdash; and starts describing the system they worry about.</p>
+          <p>That system rarely has a product page. It is usually a policy system that has been customized and maintained for one specific, thorny commercial lines book: twenty years of changes made by a small group of people, several of whom have retired. Rating lives partly in the rating module, partly in stored procedures the broker portal calls directly, and partly in the report job that recalculates premium when it produces the monthly bordereaux. There is no clean boundary between rating, portal, and reporting, because no one ever needed one. Each change was made wherever it was cheapest to make at the time.</p>
+          <p>The system is hard to work with precisely because it encodes decisions the business meant to make. The customization is a record of how the carrier wins that business: the manuscript endorsements brokers ask for, the way underwriters rate a schedule of equipment, the minimum-and-deposit logic the line requires, the reports a reinsurer insists on.</p>
+          <h2>The two standard answers both miss</h2>
+          <p>Replacement means re-implementing two decades of decisions no one can fully list, on a book profitable enough that no one wants to bet it on a migration &mdash; and the last core program already cost more than planned. Leaving the system alone means every product change waits on the one or two people who can still read the code, and the carrier&rsquo;s knowledge of its own product narrows further each time one of them leaves.</p>
+          <h2>What working inside it takes</h2>
+          <p>It takes two kinds of knowledge and a different cost model.</p>
+          <p>Someone has to recognize what the code is doing commercially: that this routine handles minimum and deposit premiums, that this table is an experience-rating plan, or that this branch exists because of one distribution agreement. Someone also has to read the technology on its own terms: the stored procedures, batch jobs, copybooks, and report definitions that may also perform rating work.</p>
+          <p>What has changed is the economics of reconstruction. Models can now work across code, configuration, rate manuals, and filed forms at a scale few project teams could justify manually, and propose a structured definition of the product: its rates, rules, coverages, forms, payment plans, underwriting requirements, and jurisdictional variation, version by version. People who know the line then verify that definition against system behavior, representative policies, and the source documents, correcting it wherever the code, configuration, and manuals disagree.</p>
+          <p>Verification is the difference between reconstruction and guesswork. Reconstruction costs less than migration because the carrier is not moving a live book or replacing the system that processes it. The system remains the system of record while its product becomes readable again.</p>
+          <h2>Fix the problem the carrier described</h2>
+          <p>None of this requires a migration. The system keeps executing the book. The product definition is maintained outside it and mapped to where each piece lives inside it &mdash; this rate table to that routine, this endorsement to those transaction codes, this report to the fields it derives. The next change is specified against the definition and implemented where it belongs. If the carrier later decides to move the book, it moves from a definition it holds rather than from another round of code reading. If the economics say the system should run for another decade, that is a fine answer too.</p>
+          <p>Some systems should be retired. But that decision should follow from the condition of the system and the economics of the book, not from the program a vendor prefers to sell.</p>
+          <p class="pull">The carriers in these conversations are not asking for a transformation. They are asking how to change one difficult product safely.</p>
+        </div>
+        <div class="article-foot">
+          <p>Scott Field is Chief Product &amp; Technology Officer at Oversee, a software company building insurance product infrastructure. More writing is available in <a href="https://oversee-ai.com/insights/">Perspectives</a>.</p>
+        </div>
+      </div>
+    </section>
+<section class="article-head" id="essay-6">
+      <div class="wrap">
+        <div class="kicker">Perspectives</div>
+        <h1>The quote form shaped the product.</h1>
+        <p class="article-meta">Scott Field, Chief Product &amp; Technology Officer &middot; July 2026</p>
+      </div>
+    </section>
+
+<section class="article">
+      <div class="wrap">
+        <div class="article-body">
+          <p>Personal lines distribution has been built around one instruction: be easy to do business with. In practice, that meant asking fewer questions. Carriers bought third-party data, prefilled fields, and built rating models that could price a risk from a handful of inputs. The ideal quote flow became one in which the applicant answered almost nothing before seeing a price.</p>
+          <p>There were good reasons. Nobody enjoys an insurance application, and every additional question loses some share of applicants before the quote.</p>
+          <p>But the constraint ran deeper than the form. Products became easier to compare when they were simpler to describe. Comparative raters rewarded carriers whose products fit a common question set. A nuanced coverage, an unusual eligibility question, or a specialist underwriting appetite had to justify the seconds it added to every quote. Over time, &ldquo;easy to do business with&rdquo; drifted toward &ldquo;easy to compare&rdquo; &mdash; and the form started shaping the product.</p>
+          <h2>Buyers weigh more than the premium</h2>
+          <p>Applicants say price comes first, and it usually does. Most also want evidence that the policy fits the way they live, drive, own property, or run a household &mdash; and when their circumstances are unusual, some sign that the insurer noticed.</p>
+          <p>The insurers that understand a particular risk best are not always the largest. A smaller carrier may write the best coverage for a specific kind of home, vehicle, or occupation. Inside a distribution experience built for speed and immediate comparison, it has few ways to show that. The carrier can know more about the risk and demonstrate less.</p>
+          <h2>Fixed forms force two choices</h2>
+          <p>Traditional quote flows are fixed forms: every applicant sees roughly the same sequence, required fields are decided in advance, and branching is limited and expensive to change. A fixed form leaves two designs. Ask everything that could matter, and the flow punishes the majority whose risks are ordinary. Ask the minimum, and the distinctions that justify a specialist product never surface.</p>
+          <p>A conversational interface allows a third design: ask the questions that become relevant as the picture of the risk develops. An applicant with an ordinary risk finishes quickly. An applicant with an unusual one answers several more questions &mdash; and each can be explained, so the exchange reads as underwriting rather than bureaucracy.</p>
+          <h2>More useful than a chatbot on a form</h2>
+          <p>A chatbot placed in front of the existing form misses most of the value. The conversation can identify a discount the applicant may qualify for and ask the one question needed to confirm it. It can notice that a stated situation &mdash; a home business, a teenage driver, a rental unit over the garage &mdash; points at underinsurance, and explain the relevant coverage in plain language. It can distinguish the information needed to rate, the information needed to establish eligibility, and the information that helps the applicant choose. The product stays as complex as the risks it covers; the applicant stops carrying that complexity all at once.</p>
+          <h2>None of it works without the product definition</h2>
+          <p>A conversation that varies by applicant still has to land on a filed product. Rates must come from approved tables. Eligibility rules must be the documented ones. Disclosures must appear where a state requires them, and the carrier must be able to show a regulator why each question was asked and how each answer affected the price.</p>
+          <p>That requires the product to exist as a structured definition &mdash; rates, rules, coverages, forms, payment plans, underwriting requirements, and jurisdictional variation &mdash; rather than as configuration scattered across a rating engine, a portal, and a forms library. The interface can adapt because the rules underneath it remain explicit and controlled. A carrier that holds its products this way can vary the conversation by applicant and still explain every outcome.</p>
+          <p>Personal lines pursued convenience by asking less. Conversational interfaces make it possible to ask the right amount &mdash; more when the risk deserves it, less when it does not &mdash; without losing control of the product.</p>
+          <p class="pull">Let the conversation adapt to the applicant. Keep the product definition controlled underneath it.</p>
+        </div>
+        <div class="article-foot">
+          <p>Scott Field is Chief Product &amp; Technology Officer at Oversee, a software company building insurance product infrastructure. More writing is available in <a href="https://oversee-ai.com/insights/">Perspectives</a>.</p>
+        </div>
+      </div>
+    </section>
+<section class="article-head" id="essay-7">
+      <div class="wrap">
+        <div class="kicker">Perspectives</div>
+        <h1>Restraint is not rewarded in insurance product design.</h1>
+        <p class="article-meta">Scott Field, Chief Product &amp; Technology Officer &middot; July 2026</p>
+      </div>
+    </section>
+
+<section class="article">
+      <div class="wrap">
+        <div class="article-body">
+          <p>Nearly twenty years and several employers ago, I managed personal lines products for an insurer. While we were first building the catalog at Oversee, I reconstructed one of those products from its current filings &mdash; the same product family I had owned as a product manager.</p>
+          <p>It was recognizably the product I remembered: the same coverages, the same rating architecture, the same renewal logic. What had changed was density. The territories were smaller, the class curves carried more points, and there were more interaction terms, more fees, and more exceptions. Twenty years of capable people had each added something. Almost nothing had been taken away.</p>
+          <p>I recognize the process because I ran it.</p>
+          <h2>The incentives rewarded adding</h2>
+          <p>The job rewarded adding segmentation: separating profitable risks from unprofitable ones a little more finely than the year before. We hunted for interaction variables &mdash; combinations of age, vehicle, and geography that carried signal the main effects missed. We added fees where they could be justified and smoothed premium where smoothing protected profitable renewals. We were reasonably honest with ourselves about why: segmentation was the visible route to loss ratio improvement, and loss ratio improvement was how the bonus was earned. The techniques changed around that constant &mdash; minimum-bias methods before GLMs were ubiquitous, then GLMs, now GBMs &mdash; and each generation of tooling found structure the previous one missed. The incentive structure the tooling served did not change at all. Nobody was recognized for removing a distinction, and no meeting existed in which a variable had to argue for its continued existence.</p>
+          <p>Even deliberate simplification could return later as complexity. We smoothed jagged rating curves because the result was easier to file, explain, and renew against. The residual pattern remained in the experience. A later modeling exercise could find it again as an interaction effect and add it back through a more complicated structure. Each decision was defensible. The combined result was that signal we had once set aside could be purchased again at a higher implementation cost. Nothing in that system rewarded restraint.</p>
+          <h2>Nobody owns the whole product</h2>
+          <p>There is a second reason subtraction never happened. The product manager carries the P&amp;L, but the product itself is distributed: actuarial owns the rates, compliance the forms, underwriting the rules, distribution the questions a quote flow may ask, billing the payment plans, IT every implementation. Accountability for the whole sits with one person; control of the parts does not.</p>
+          <p>Adding fits that structure &mdash; each function can add within its own lane and its own approval path. Removing does not fit. Taking out a territory boundary or collapsing a class curve requires dislocation analysis from actuarial, a refiling from compliance, portal changes, regression testing, and an explanation to distribution: coordination across every lane at once, for a benefit that lands in nobody&rsquo;s individual objectives. Accumulation is the default state of a product managed in slices; it does not require anyone to fail at their job.</p>
+          <h2>Incremental benefit, cumulative cost</h2>
+          <p>The benefit of each distinction was measured incrementally: did this variable improve fit, did this interaction produce lift. The cost was carried cumulatively. Every successful addition joined all the additions before it and had to be filed, implemented, tested, maintained, and eventually migrated. We evaluated the next distinction against the current model. We rarely evaluated the accumulated product against the business it now had to serve.</p>
+          <p>The modeling work is the cheapest part of a rating variable. The expensive part is everything it obliges every system, and every successor, to carry. A new interaction term is a rating table someone maintains, a mapping in each system that rates, a set of test cases, an exhibit in every future filing, a question a portal may need to ask. A subdivided territory is another boundary to hold consistent across every platform the product touches &mdash; and again at the next migration.</p>
+          <h2>Rationalization is the missing discipline</h2>
+          <p>The industry talks mostly about product launch, because launch has costs that are easy to quantify: months, headcount, implementation fees. Rationalization &mdash; asking whether each distinction still earns its place &mdash; has no budget line, because its benefits arrive as explainability, premium stability, cheaper maintenance, and faster future changes, none of which appear in this quarter&rsquo;s numbers.</p>
+          <p>Pricing teams already require new complexity to justify itself. Rationalization applies the same standard to complexity inherited from previous generations. The work is concrete: state the commercial decision each distinction represents, measure the premium dislocation of removing it, test whether its signal is absorbed by the remaining variables, list everything it touches. The decision will often be to keep the distinction &mdash; or to simplify one part of the product and spend that complexity somewhere it prices something. Rationalization done well reallocates complexity rather than merely cutting it.</p>
+          <h2>Which complexity earns its place</h2>
+          <p>None of this argues that simpler is always better. Real segmentation reflects real differences in risk, and some products should carry more structure than others. But when nobody can state the decision a distinction represents, it has stopped being pricing and become sediment.</p>
+          <p>Looking at my old product, the surprise was not the accumulation. It was that in twenty years of locally justified additions, examining the accumulated weight had apparently never been anyone&rsquo;s job. I still believe products should price risk as accurately as the data supports.</p>
+          <p class="pull">Accuracy and accumulation are not the same thing.</p>
+        </div>
+        <div class="article-foot">
+          <p>Scott Field is Chief Product &amp; Technology Officer at Oversee, a software company building insurance product infrastructure. More writing is available in <a href="https://oversee-ai.com/insights/">Perspectives</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="wrap closing-grid">
+        <div>
+          <div class="kicker">Perspectives</div>
+          <h2>If the writing resonates, the conversation will too.</h2>
+          <p>Thirty minutes on your products, your systems, and whether the platform fits. No preparation needed.</p>
+        </div>
+        <div class="closing-actions">
+          <a class="btn primary" href="https://oversee-ai.com">oversee-ai.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-bottom">
+      <span>&copy; 2026 OverseeAI. All rights reserved.</span>
+      <span><a href="https://oversee-ai.com/privacy-policy/">Privacy</a> &middot; <a href="https://oversee-ai.com/terms-and-conditions">Terms</a></span>
+    </div>
+  </footer>
+</body>
+</html>
